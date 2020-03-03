@@ -1,0 +1,13 @@
+@import "reset.css";
+
+.App-header {
+  background-color: black;
+  color: white;
+}
+body{  font-family: Arial, Helvetica, sans-serif;
+}
+a {
+  color: white;
+  cursor: pointer;
+}
+

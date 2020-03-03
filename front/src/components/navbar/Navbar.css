@@ -1,0 +1,21 @@
+.nav-style  {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+	height: 3vh;
+	background-color: black;
+	color: white;
+}
+
+.change-style {
+	background-color: black;
+	color: white;
+	border: none;
+	font-size: 0.6rem;
+}
+
+.user-buttons {
+	display: flex;
+	flex-direction: row;
+}
