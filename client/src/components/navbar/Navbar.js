@@ -1,9 +1,9 @@
 // navbar/Navbar.js
 
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthService from "../auth/AuthService";
-import "./Navbar.css";
+import "./Navbar.scss";
 import Login from "../auth/Login";
 import Signup from "../auth/Signup";
 
@@ -38,20 +38,36 @@ class Navbar extends Component {
         ></input>
         {this.state.loggedInUser ? (
           <React.Fragment>
-            <h2>{this.state.loggedInUser.username}</h2>
-            <a onClick={this.handleLogout}>logout</a>
+            <div className="profile-navbar">
+              {" "}
+              <Link to="/profile">
+                {" "}
+                <h1>{this.state.loggedInUser.username}</h1>
+              </Link>
+              <a onClick={this.handleLogout}>logout</a>
+            </div>
           </React.Fragment>
         ) : (
           <ul>
             {this.state.isSignup ? (
               <div className="user-buttons">
                 <Login getUser={this.props.getUser} />
-                <button className="change-style" onClick={() => this.changeState()}>or signup</button>
+                <button
+                  className="change-style"
+                  onClick={() => this.changeState()}
+                >
+                  or signup
+                </button>
               </div>
             ) : (
               <div className="user-buttons">
                 <Signup getUser={this.props.getUser} />
-                <button className="change-style" onClick={() => this.changeState()}>or login</button>
+                <button
+                  className="change-style"
+                  onClick={() => this.changeState()}
+                >
+                  or login
+                </button>
               </div>
             )}
           </ul>

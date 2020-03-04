@@ -1,0 +1,19 @@
+.Profile-style {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  height: 80vh;
+  margin: 0 auto;
+  background-color: black;
+  color:white;
+  position:fixed;
+  top:0;
+  z-index: 10;
+}
+
+.Profile-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}

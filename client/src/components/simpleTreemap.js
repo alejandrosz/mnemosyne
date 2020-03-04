@@ -55,7 +55,7 @@ export default class SimpleTreemapExample extends React.Component {
             colorRange: ['#88572C'],
             data: D3FlareData,
             mode: MODE[modeIndex],
-            renderMode:  'DOM',
+            renderMode: 'DOM',
             height: 600,
             width: 600,
             margin: 50,
