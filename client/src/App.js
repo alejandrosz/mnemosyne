@@ -8,16 +8,14 @@ import Contents from "./components/contents/Contents";
 import axios from "axios";
 import Footer from "./components/footer/Footer";
 import * as d3 from "d3";
-
 // import "../treeStyles.css"
 import SimpleTreemapExample from "./components/simpleTreemap";
 import Profile from "./components/profile/Profile";
 import Detail from "./Detail/Detail";
-import D3Test2 from "./components/contents/D3Test/D3Test2";
+import D3Test2 from "./components/D3Test/D3Test2";
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
 // render(<div ref=”myDiv”></div>)
-
 
 class App extends Component {
   constructor(props) {

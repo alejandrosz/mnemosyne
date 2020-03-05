@@ -3,7 +3,7 @@ var axios = require("axios");
 const csv = require("csvtojson");
 const mongoose = require("mongoose");
 const Piece = require("../models/Piece");
-const dataMOMA = require("./dataMOMA");
+const dataMOMA = require("../dataMOMA.json");
 // import { format } from 'url';
 mongoose
   .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
@@ -19,13 +19,13 @@ const uriBaseMET =
   "https://collectionapi.metmuseum.org/public/collection/v1/objects/"; // + [objectID]
 const uriBaseRMA = "https://www.rijksmuseum.nl/api/en/collection/";
 const csvFilePath =
-  "/Users/laura/Documents/Ironhack/w8d1/mnemosyne/server/bin/dataRMA.csv";
+  "/Users/laura/Documents/Ironhack/w8d1/mnemosyne/server/dataRMA.csv";
 
 const getPieceMET = id => {
   return axios
     .get(uriBaseMET + id)
     .then(result => {
-      console.log("result", id);
+      console.log("result MET", id);
       // console.log("resultdata", result.data)
 
       if (result && result.data && result.data.primaryImageSmall !== "") {
@@ -100,7 +100,7 @@ const getPieceRMA = id => {
   return axios
     .get(uriBaseRMA + id + "?key=LfznSiay")
     .then(result => {
-      console.log("result", id);
+      console.log("result RMA", id);
       if (
         result &&
         result.data &&
@@ -116,23 +116,25 @@ const getPieceRMA = id => {
           materials,
           techniques,
           dating,
+          description,
           classification,
           productionPlaces,
-          objectCollection
+          objectCollection,
+          makers
         } = result.data.artObject;
         const obj = {
           museum: "RMA",
           museumId: id,
           name: title,
           imageUrl: webImage.url,
-          description: plaqueDescriptionEnglish,
+          description: plaqueDescriptionEnglish || description,
           author: principalMaker,
           year: dating && dating.sortingDate,
           period: [dating.period],
-          culture: "",
+          culture: makers[0] ? makers[0].nationality : "",
           origin: [...classification.places, ...productionPlaces],
-          technic: [...objectTypes, ...materials, ...techniques],
-          classification: "",
+          technic: [...materials, ...techniques],
+          classification: objectTypes[0],
           department: objectCollection && objectCollection[0],
           tags: [...classification.iconClassDescription]
         };
@@ -148,36 +150,49 @@ const getPieceRMA = id => {
 
 const getPieceMOMA = index => {
   const piece = dataMOMA[index];
-  const {
-    ObjectId,
-    Artist,
-    Title,
-    ThumbnailURL,
-    Department,
-    Classification,
-    Nationality
-  } = piece;
-  const year = parseInt(piece.Date.slice(0, 4));
-  const obj = {
-    museum: "MOMA",
-    museumId: ObjectId,
-    name: Title,
-    imageUrl: ThumbnailURL,
-    description: "",
-    author: Artist[0],
-    year: year,
-    period: [],
-    culture: "",
-    origin: Nationality,
-    technic: [],
-    classification: Classification,
-    department: Department,
-    tags: []
-  };
-  Piece.create(obj).catch(err => {
-    mongoose.disconnect();
-    throw err;
-  });
+  if (
+    piece &&
+    piece.ThumbnailURL !== "" &&
+    piece.ThumbnailURL !== null &&
+    piece.Date !== null &&
+    piece.Date.length >= 4 &&
+    piece.Date.match(/\d{4}/) &&
+    piece.Date.match(/\d{4}/)[0]
+  ) {
+    // console.log("piece", piece);
+    const year = parseInt(piece.Date.match(/\d{4}/)[0]);
+    console.log(piece)
+    const {
+      ObjectID,
+      Artist,
+      Title,
+      ThumbnailURL,
+      Department,
+      Medium,
+      Classification,
+      Nationality
+    } = piece;
+    const obj = {
+      museum: "MOMA",
+      museumId: ObjectID,
+      name: Title,
+      imageUrl: ThumbnailURL,
+      description: "",
+      author: Artist[0],
+      year: year,
+      period: [],
+      culture: Nationality[0],
+      origin: Nationality,
+      technic: Medium,
+      classification: Classification,
+      department: Department,
+      tags: []
+    };
+    Piece.create(obj).catch(err => {
+      mongoose.disconnect();
+      throw err;
+    });
+  }
 };
 const metIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
@@ -199,8 +214,8 @@ const momaIds = (startFrom, to) => {
     getPieceMOMA(i);
   }
 };
-const start = 1000;
-const finish = 1010;
+const start = 60000;
+const finish = 60010;
 // metIds(start + 1, finish);
-rmaIds(start, finish);
-// momaIds(start, finish);
+// rmaIds(start, finish);
+momaIds(start, finish);

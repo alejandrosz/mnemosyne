@@ -15,20 +15,36 @@ class Profile extends Component {
   // }
 
   render() {
-    console.log("user", this.props)
-    return (
-      <div className="Profile-style">
-        <div className="Profile-top">
-          <h1>perfil de {this.props.user.username}</h1>
-          <Link to="/">
-            <h1>X</h1>
-          </Link>
+    console.log("user", this.props);
+    if (this.props.user) {
+      return (
+        <div className="Profile-style">
+          <div className="Profile-top">
+            <h1>perfil de {this.props.user.username}</h1>
+            <Link to="/">
+              <h1>X</h1>
+            </Link>
+          </div>
+          <div className="Profile-body">
+            <p>texto dentro del perfil de {this.props.user.username}</p>
+          </div>
         </div>
-        <div className="Profile-body">
-          <p>texto dentro del perfil de alfredo</p>
+      );
+    } else {
+      return (
+        <div className="Profile-style">
+          <div className="Profile-top">
+            <h1>perfil de hola</h1>
+            <Link to="/">
+              <h1>X</h1>
+            </Link>
+          </div>
+          <div className="Profile-body">
+            <p>texto dentro del perfil de </p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

@@ -5,7 +5,6 @@ class D3Test2 extends Component {
     console.log("D3test");
     const temperatureData = [8, 5, 13, 9, 12];
 
-
     // esto asigna a cada linea el valor del datapoint
     d3.select(this.refs.temperatures)
       .selectAll("h2")
@@ -19,20 +18,6 @@ class D3Test2 extends Component {
       return "hsl(" + Math.random() * 360 + ",100%,50%)";
     });
 
-    //esto asigna un color condicionalmente segun el dato a veces no va
-    // d3.select(this.refs.temperatures)
-    //   .selectAll("h2")
-    //   .data(temperatureData)
-    //   .enter()
-    //   .append("h2")
-    //   .text(datapoint => `${datapoint} degrees`)
-    //   .style(datapoint => {
-    //     if (datapoint > 10) {
-    //       return "red";
-    //     } else {
-    //       return "blue";
-    //     }
-    //   });
 
     //hace una transicion del background a rojo
     d3.select(this.refs.temperatures)
