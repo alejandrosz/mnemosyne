@@ -1,0 +1,33 @@
+body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+    
+text {
+  pointer-events: none;
+}
+.grandparent text {
+  font-weight: bold;
+}
+rect {
+  fill: none;
+  stroke: #fff;
+}
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+.grandparent rect {
+  fill: orange;
+}
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: 0.5;
+}
+.children:hover rect.child {
+  fill: #bbb;
+}

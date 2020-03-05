@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.9.5",
     "axios": "^0.18.0",
     "d3": "^5.15.0",
+    "dotenv-cli": "^3.1.0",
     "node-sass": "^4.13.1",
     "react": "^16.7.0-alpha.2",
     "react-d3-library": "^1.1.8",
@@ -16,8 +17,9 @@
     "treemap": "^1.0.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "dotenv -e .env.dev react-scripts start",
+    "build-dev": "dotenv -e .env.dev react-scripts build",
+    "build-prod": "dotenv -e .env.prod react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
