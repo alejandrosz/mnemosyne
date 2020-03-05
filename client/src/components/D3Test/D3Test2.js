@@ -1433,8 +1433,8 @@ class D3Test2 extends Component {
     //https://bl.ocks.org/JacquesJahnichen/42afd0cde7cbf72ecb81
     //https://bl.ocks.org/ganeshv/6a8e9ada3ab7f2d88022
     //https://gist.github.com/tkafka/6d00c44d5ae52182f548a18e8db44811
-    var margin = { top: 24, right: 0, bottom: 0, left: 0 },
-      width = 1200, //640
+    var margin = { top: 24, right: 0, bottom: 0, left: 0 }, // margen superior para pulsar y retroceder
+      width = 1080, //640
       height = 530,
       formatNumber = d3.format(",d"),
       transitioning;
@@ -1452,7 +1452,7 @@ class D3Test2 extends Component {
     var color = d3.scaleOrdinal().range(
       d3.schemeCategory10.map(function(c) {
         c = d3.rgb(c);
-        c.opacity = 0.6;
+        c.opacity = 1;
         return c;
       })
     );
@@ -1497,7 +1497,16 @@ class D3Test2 extends Component {
           .append("rect")
           .attr("y", -margin.top)
           .attr("width", width)
-          .attr("height", margin.top);
+          .attr("height", margin.top)
+          // .attr("fill", 'none')
+          ;
+
+          grandparent.append("image")
+          .attr("xlink:href", function (d) { return d.cover;})
+          .attr("x", 2)
+          .attr("width", 76)
+          .attr("height", 120);
+          // .on('dblclick', showInfo);
 
         grandparent
           .append("text")
