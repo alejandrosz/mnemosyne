@@ -1,4 +1,4 @@
-var data = {
+const data = {
   name: "Sample",
   shortName: "Sample",
   children: [
@@ -72,12 +72,14 @@ var data = {
         {
           name: "Contribute to collegial  and apply.",
           shortName: "AITSL-A63-P",
+     
           size: 84,
           children: []
         },
         {
           name: "Initiate and engage in  discussions.",
           shortName: "AITSL-A63-H",
+       
           size: 51,
           children: []
         },
@@ -128,3 +130,5 @@ var data = {
     }
   ]
 };
+
+export default data;

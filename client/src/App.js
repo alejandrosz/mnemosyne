@@ -7,7 +7,7 @@ import AuthService from "./components/auth/AuthService";
 import Contents from "./components/contents/Contents";
 import axios from "axios";
 import Footer from "./components/footer/Footer";
-import * as d3 from "d3";
+// import * as d3 from "d3";
 // import "../treeStyles.css"
 import SimpleTreemapExample from "./components/simpleTreemap";
 import Profile from "./components/profile/Profile";
@@ -124,12 +124,12 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => (
-                <Contents
-                totalItems={this.state.resultsDetail.length}
-                query={this.state.resultsDetail}
-                />
-                )}
+              // render={() => (
+              //   // <Contents
+              //   // totalItems={this.state.resultsDetail.length}
+              //   // query={this.state.resultsDetail}
+              //   // />
+              //   )}
                 />
             <Route
               path="/profile"
