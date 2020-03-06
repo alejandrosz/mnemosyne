@@ -31,16 +31,12 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="nav-style">
-        <input
+        {/* <input
           type="text"
           onKeyDown={e => this.props.searchBar(e)}
           placeholder="searchapi"
-        ></input>
-          <input
-          type="text"
-          onKeyDown={e => this.props.searchMongo(e)}
-          placeholder="search"
-        ></input>
+        ></input> */}
+   
         {this.state.loggedInUser ? (
           <React.Fragment>
             <div className="profile-navbar">

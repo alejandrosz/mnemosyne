@@ -32,6 +32,11 @@ class Footer extends Component {
     console.log("tags", this.state.tags);
     return (
       <div className="footer-style">
+        <input
+          type="text"
+          onKeyDown={e => this.props.searchMongo(e)}
+          placeholder="search"
+        ></input>
         <select name="filterlist" form="filterform">
           <option value="1">Filters</option>
           {this.state.tags.map(tag => (

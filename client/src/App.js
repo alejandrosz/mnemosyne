@@ -55,34 +55,19 @@ class App extends Component {
       });
   }
 
-  searchBar(e) {
-    if (e.key === "Enter") {
-      axios
-        .get(
-          `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${e.target.value}`
-        )
-        .then(results => {
-          results = results.data.objectIDs;
-          if (results) {
-            this.setState({ resultsId: results }, () => {
-              this.getResultsDetail(0);
-            });
-          }
-        });
-    }
-  }
-
-  // searchMongo(e) {
+  // searchBar(e) {
   //   if (e.key === "Enter") {
   //     axios
-  //       .get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`)
+  //       .get(
+  //         `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${e.target.value}`
+  //       )
   //       .then(results => {
-  //         results = results.data;
-
+  //         results = results.data.objectIDs;
   //         if (results) {
-  //           this.setState({ resultsDetail: results });
+  //           this.setState({ resultsId: results }, () => {
+  //             this.getResultsDetail(0);
+  //           });
   //         }
-  //         console.log("state",this.state.resultsDetail);
   //       });
   //   }
   // }
@@ -109,40 +94,40 @@ class App extends Component {
     console.log("state", this.state.resultsDetail);
   }
 
-  getResultsDetail(idx) {
-    if (idx < 10) {
-      const id = this.state.resultsId[idx];
-      axios
-        .get(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
-        )
-        .then(result => {
-          result = result.data;
+  // getResultsDetail(idx) {
+  //   if (idx < 10) {
+  //     const id = this.state.resultsId[idx];
+  //     axios
+  //       .get(
+  //         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+  //       )
+  //       .then(result => {
+  //         result = result.data;
 
-          this.setState(
-            prevState => {
-              const newResultsDetail = [...prevState.resultsDetail];
+  //         this.setState(
+  //           prevState => {
+  //             const newResultsDetail = [...prevState.resultsDetail];
 
-              if (newResultsDetail.length <= 20) {
-                newResultsDetail.push(result);
-                return {
-                  resultsDetail: newResultsDetail
-                };
-              } else if (newResultsDetail.length > 20) {
-                newResultsDetail.shift();
-                newResultsDetail.push(result);
-                return {
-                  resultsDetail: newResultsDetail
-                };
-              }
-            },
-            () => {
-              this.getResultsDetail(idx + 1);
-            }
-          );
-        });
-    }
-  }
+  //             if (newResultsDetail.length <= 20) {
+  //               newResultsDetail.push(result);
+  //               return {
+  //                 resultsDetail: newResultsDetail
+  //               };
+  //             } else if (newResultsDetail.length > 20) {
+  //               newResultsDetail.shift();
+  //               newResultsDetail.push(result);
+  //               return {
+  //                 resultsDetail: newResultsDetail
+  //               };
+  //             }
+  //           },
+  //           () => {
+  //             this.getResultsDetail(idx + 1);
+  //           }
+  //         );
+  //       });
+  //   }
+  // }
 
   render() {
     console.log(this.state.resultsDetail);
@@ -152,8 +137,7 @@ class App extends Component {
           <D3Test2 data={this.state.resultsDetail}></D3Test2>
 
           <Navbar
-            searchBar={e => this.searchBar(e)}
-            searchMongo={e => this.searchMongo(e)}
+            // searchBar={e => this.searchBar(e)}
             userInSession={this.state.loggedInUser}
             logout={this.logout}
             getUser={this.getUser}
@@ -189,6 +173,7 @@ class App extends Component {
             />
           </Switch>
           <Footer
+            searchMongo={e => this.searchMongo(e)}
             tags={this.state.resultsDetail ? this.state.resultsDetail : []}
           ></Footer>
         </div>

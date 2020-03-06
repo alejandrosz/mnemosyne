@@ -27,7 +27,7 @@ const data = {
           children: [
             { name: "Photo 1", value: "epc-1.jpg" },
             { name: "Photo 2", value: "epc-2.jpg" },
-            { name: "Photo 3", value: "epc-3.jpg" }
+            { name: "Photo 3", value: "epc-3.jpg", size }
           ]
         },
         {
