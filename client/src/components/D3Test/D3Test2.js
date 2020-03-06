@@ -103,7 +103,7 @@ class D3Test2 extends Component {
 
       var t = d3
         .transition()
-        .duration(800)
+        .duration(Math.floor(Math.random() * 2200) + 1200 )
         .ease(d3.easeCubicOut);
 
       cells

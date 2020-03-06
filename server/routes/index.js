@@ -9,20 +9,25 @@ router.get("/pieces/:filter", (req, res, next) => {
   let filter = req.params.filter;
   Pieces.find({
     $or: [
-      { museum: { $regex: filter, $options: "i" } },
-      { name: { $regex: filter, $options: "i" } },
-      { description: { $regex: filter, $options: "i" } },
-      { author: { $regex: filter, $options: "i" } },
-      { year: { $regex: filter, $options: "i" } },
-      // { period: { $regex: filter, $options: "i" } },
-      // { culture: { $regex: filter, $options: "i" } },
-      // { origin: { $regex: filter, $options: "i" } },
-      // { technic: { $regex: filter, $options: "i" } },
-      // { classification: { $regex: filter, $options: "i" } },
-      // { department: { $regex: filter, $options: "i" } },
-      // { tags: { $regex: filter, $options: "i" } }
+      { name: new RegExp(filter, "gi") },
+      { museum: new RegExp(filter, "gi") }
     ]
   })
+    // $or: [
+    //   { museum: { $regex: filter, $options: "i" } },
+    //   { name: { $regex: filter, $options: "i" } },
+    //   { description: { $regex: filter, $options: "i" } },
+    //   { author: { $regex: filter, $options: "i" } },
+    //   { year: { $regex: filter, $options: "i" } },
+    // { period: { $regex: filter, $options: "i" } },
+    // { culture: { $regex: filter, $options: "i" } },
+    // { origin: { $regex: filter, $options: "i" } },
+    // { technic: { $regex: filter, $options: "i" } },
+    // { classification: { $regex: filter, $options: "i" } },
+    // { department: { $regex: filter, $options: "i" } },
+    // { tags: { $regex: filter, $options: "i" } }
+    // ]
+
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error connecting to mongo");

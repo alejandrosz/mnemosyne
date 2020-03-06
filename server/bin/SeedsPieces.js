@@ -218,8 +218,8 @@ const momaIds = (startFrom, to) => {
     }, 1000);
   }
 };
-const start = 20001;
-const finish = 30000;
-// metIds(start + 1, finish);
+const start = 30001;
+const finish = 40000;
+metIds(start + 1, finish);
 // rmaIds(start, finish);
-momaIds(start, finish);
+// momaIds(start, finish);
