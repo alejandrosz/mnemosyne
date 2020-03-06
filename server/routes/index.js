@@ -10,9 +10,20 @@ router.get("/pieces/:filter", (req, res, next) => {
   Pieces.find({
     $or: [
       { name: new RegExp(filter, "gi") },
-      { museum: new RegExp(filter, "gi") }
+      { museum: new RegExp(filter, "gi") },
+      { description: new RegExp(filter, "gi") },
+      { author: new RegExp(filter, "gi") },
+      // { year: new RegExp(filter, "gi") },
+      { period: new RegExp(filter, "gi") },
+      { culture: new RegExp(filter, "gi") },
+      { origin: new RegExp(filter, "gi") },
+      { technic: new RegExp(filter, "gi") },
+      { classification: new RegExp(filter, "gi") },
+      { department: new RegExp(filter, "gi") },
+      { tags: new RegExp(filter, "gi") }
     ]
   })
+
     // $or: [
     //   { museum: { $regex: filter, $options: "i" } },
     //   { name: { $regex: filter, $options: "i" } },

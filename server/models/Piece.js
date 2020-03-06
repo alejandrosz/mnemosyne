@@ -15,7 +15,8 @@ const pieceSchema = new Schema({
   technic: Array,
   classification: String,
   department: String,
-  tags: Array
+  tags: Array,
+  rating: Number
 });
 
 const Piece = mongoose.model("Piece", pieceSchema);
