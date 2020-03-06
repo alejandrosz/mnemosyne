@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 import "./D3Test2.scss";
-import data from "./Dataset1";
-import data2 from "./Dataset2";
+// import data from "./Dataset1";
+// import data2 from "./Dataset2";
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {

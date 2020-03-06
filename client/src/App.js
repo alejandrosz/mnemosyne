@@ -112,7 +112,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="App">
-        <D3Test2></D3Test2>
+        <D3Test2 data={this.state.resultsDetail}></D3Test2>
 
           <Navbar
             searchBar={e => this.searchBar(e)}
