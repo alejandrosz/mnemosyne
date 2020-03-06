@@ -72,6 +72,43 @@ class App extends Component {
     }
   }
 
+  // searchMongo(e) {
+  //   if (e.key === "Enter") {
+  //     axios
+  //       .get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`)
+  //       .then(results => {
+  //         results = results.data;
+
+  //         if (results) {
+  //           this.setState({ resultsDetail: results });
+  //         }
+  //         console.log("state",this.state.resultsDetail);
+  //       });
+  //   }
+  // }
+
+  searchMongo(e) {
+    if (e.key === "Enter") {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`)
+        .then(results => {
+          results = results.data;
+          if (results) {
+            this.getData(results);
+          }
+        });
+    }
+  }
+
+  getData(results) {
+    let data = results.map(result => ({
+      name: result.name,
+      value: result.imageUrl
+    }));
+    this.setState({ resultsDetail: { children: data } });
+    console.log("state", this.state.resultsDetail);
+  }
+
   getResultsDetail(idx) {
     if (idx < 10) {
       const id = this.state.resultsId[idx];
@@ -108,18 +145,19 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.resultsDetail)
+    console.log(this.state.resultsDetail);
     return (
       <React.Fragment>
         <div className="App">
-        <D3Test2 data={this.state.resultsDetail}></D3Test2>
+          <D3Test2 data={this.state.resultsDetail}></D3Test2>
 
           <Navbar
             searchBar={e => this.searchBar(e)}
+            searchMongo={e => this.searchMongo(e)}
             userInSession={this.state.loggedInUser}
             logout={this.logout}
             getUser={this.getUser}
-            />
+          />
           <Switch>
             <Route
               exact
@@ -130,24 +168,24 @@ class App extends Component {
               //   // query={this.state.resultsDetail}
               //   // />
               //   )}
-                />
+            />
             <Route
               path="/profile"
               render={() => (
                 <Profile
-                className="profilecomponent"
-                user={this.state.loggedInUser}
+                  className="profilecomponent"
+                  user={this.state.loggedInUser}
                 />
-                )}
-                />
+              )}
+            />
             <Route
               path="/detail"
               render={() => (
                 <Detail
-                className="profilecomponent"
-                user={this.state.loggedInUser}
+                  className="profilecomponent"
+                  user={this.state.loggedInUser}
                 />
-                )}
+              )}
             />
           </Switch>
           <Footer
@@ -155,7 +193,6 @@ class App extends Component {
           ></Footer>
         </div>
         {/* <SimpleTreemapExample></SimpleTreemapExample> */}
-      
       </React.Fragment>
     );
   }

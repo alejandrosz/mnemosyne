@@ -3,12 +3,14 @@ import * as d3 from "d3";
 import "./D3Test2.scss";
 // import data from "./Dataset1";
 // import data2 from "./Dataset2";
-import data from "./Dataset3";
+// import data from "./Dataset3";
+// import data from "./Dataset4";
 
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
   render() {
+    let data = this.props.data;
     var width = 100, // % of the parent element
       height = 100,
       x = d3
@@ -21,6 +23,7 @@ class D3Test2 extends Component {
         .range([0, height]),
       color = d3.scaleOrdinal().range(
         d3.schemeDark2.map(function(c) {
+          // d3.schemeBlues.map(function(c) {
           c = d3.rgb(c);
           //c.opacity = 0.5;
           return c;
@@ -32,7 +35,6 @@ class D3Test2 extends Component {
         //.tile(d3.treemapResquarify) // doesn't work - height & width is 100%
         .paddingInner(0)
         .round(false), //true
-     
       nodes = d3.hierarchy(data).sum(function(d) {
         return d.value ? 1 : 0;
       }),
@@ -69,7 +71,9 @@ class D3Test2 extends Component {
         return y(d.y1) - y(d.y0) + "%";
       })
       //.style("background-image", function(d) { return d.value ? imgUrl + d.value : ""; })
-      .style("background-image", function(d) { return d.value ? `url(${d.data.value})` : "none"; })
+      .style("background-image", function(d) {
+        return d.value ? `url(${d.data.value})` : "none";
+      })
 
       // .style("background-image", function(d) { return d.value ? "url(http://placekitten.com/g/300/300)" : "none"; })
       .style("background-color", function(d) {
@@ -103,7 +107,7 @@ class D3Test2 extends Component {
 
       var t = d3
         .transition()
-        .duration(Math.floor(Math.random() * 2200) + 1200 )
+        .duration(Math.floor(Math.random() * 2200) + 1200)
         .ease(d3.easeCubicOut);
 
       cells

@@ -34,6 +34,11 @@ class Navbar extends Component {
         <input
           type="text"
           onKeyDown={e => this.props.searchBar(e)}
+          placeholder="searchapi"
+        ></input>
+          <input
+          type="text"
+          onKeyDown={e => this.props.searchMongo(e)}
           placeholder="search"
         ></input>
         {this.state.loggedInUser ? (

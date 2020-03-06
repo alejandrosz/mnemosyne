@@ -52,13 +52,15 @@ nav {
   .label {
     display: inline;
     font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
     color: hsla(0, 0, 100, 0.6);
     //white-space: nowrap;
     position: absolute;
     padding: 0;
     margin: 0;
-    top: 90%;
-    left: 50%;
+    bottom: 10%;
+    left: 10%;
     transform: translateX(-50%) translateY(-50%);
     transition: color 0.4s, opacity 0.8s, filter 0.8s;
   }

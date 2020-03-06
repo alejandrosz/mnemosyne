@@ -89,7 +89,7 @@ const data = {
           name: "Skylon",
           children: [
             { name: "Photo 1", value: "sewn-1.jpg" },
-            { name: "Photo 2", value: "https://vignette.wikia.nocookie.net/mario/images/d/d7/SMO_Art_-_Mario.png/revision/latest?cb=20170114200910&path-prefix=es" },
+            // { name: "Photo 2", value: "https://vignette.wikia.nocookie.net/mario/images/d/d7/SMO_Art_-_Mario.png/revision/latest?cb=20170114200910&path-prefix=es" },
             { name: "Photo 3", value: "sewn-3.jpg" }
           ]
         },
@@ -106,7 +106,7 @@ const data = {
             { name: "Photo 1", value: "hardback-1.jpg" },
             { name: "Photo 2", value: "hardback-2.jpg" },
             { name: "Photo 3", value: "hardback-3.jpg" },
-            { name: "Photo 4", value: "https://cdn.icon-icons.com/icons2/1659/PNG/128/3844437-hamburger-list-menu-more-navigation_110311.png" }
+            // { name: "Photo 4", value: "https://cdn.icon-icons.com/icons2/1659/PNG/128/3844437-hamburger-list-menu-more-navigation_110311.png" }
           ]
         }
       ]
