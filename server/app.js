@@ -30,25 +30,6 @@ const debug = require("debug")(
 const app = express();
 
 // Middleware Setup
-var corsOptions = {
-  origin: function(origin, callback){
-      // var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-      callback(null, true);
-  },
-  credentials: true
-};
-app.use(cors(corsOptions));
-
-app.use(function (req, res, next) {	
-  res.setHeader('Access-Control-Allow-Origin', '*');    
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');    
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Auth-Token, X-Requested-With, Content-Type');   
-  res.setHeader('Access-Control-Allow-Credentials', true);    
-  next();
-});
-
-
-// Middleware Setup
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -79,15 +60,23 @@ app.use(express.static(path.join(__dirname, "public")));
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
 
-// app.use(cors());
+// Middleware Setup
+var corsOptions = {
+  origin: function(origin, callback){
+      // var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+      callback(null, true);
+  },
+  credentials: true
+};
+app.use(cors(corsOptions));
 
-// app.use(function (req, res, next) {	
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');    
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');    
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');   
-//   res.setHeader('Access-Control-Allow-Credentials', true);   
-//   next();
-// });
+app.use(function (req, res, next) {	
+  res.setHeader('Access-Control-Allow-Origin', '*');    
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');    
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Auth-Token, X-Requested-With, Content-Type');   
+  res.setHeader('Access-Control-Allow-Credentials', true);    
+  next();
+});
 
 const index = require("./routes/index");
 app.use("/api", index);
