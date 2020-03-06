@@ -3,14 +3,14 @@ import * as d3 from "d3";
 import "./D3Test2.scss";
 // import data from "./Dataset1";
 // import data2 from "./Dataset2";
-// import data from "./Dataset3";
+import data from "./Dataset3";
 // import data from "./Dataset4";
 
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
   render() {
-    let data = this.props.data;
+    // let data = this.props.data;
     var width = 100, // % of the parent element
       height = 100,
       x = d3

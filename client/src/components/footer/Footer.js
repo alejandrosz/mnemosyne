@@ -29,7 +29,6 @@ class Footer extends Component {
   }
 
   render() {
-    console.log("tags", this.state.tags);
     return (
       <div className="footer-style">
         <input

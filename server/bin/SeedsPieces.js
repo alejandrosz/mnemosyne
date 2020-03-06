@@ -80,9 +80,12 @@ const getPieceMET = id => {
           technic: [medium],
           classification: classification,
           department: department,
-          tags: ts
+          tags: ts,
+          rating: Math.floor(Math.random() * 300) + 100
         };
-        Piece.create(obj).catch(err => {
+        Piece.update({ museumId: id, museum: "MET" }, obj, {
+          upsert: true
+        }).catch(err => {
           // mongoose.disconnect();
           // throw err;
           console.log(err);
@@ -99,6 +102,8 @@ const getPieceRMA = id => {
   return axios
     .get(uriBaseRMA + id + "?key=LfznSiay")
     .then(result => {
+      // console.log("piece rma", result.data);
+
       if (
         result &&
         result.data &&
@@ -134,9 +139,15 @@ const getPieceRMA = id => {
           technic: [...materials, ...techniques],
           classification: objectTypes[0],
           department: objectCollection && objectCollection[0],
-          tags: [...classification.iconClassDescription]
+          tags: [...classification.iconClassDescription],
+          rating: Math.floor(Math.random() * 300) + 100
         };
-        Piece.create(obj).catch(err => {
+        Piece.create(
+          obj
+
+          // Piece.update({ museumId: id, museum: "RMA" }, obj, {
+          //   upsert: true
+        ).catch(err => {
           console.log(err);
         });
       }
@@ -158,7 +169,7 @@ const getPieceMOMA = index => {
     piece.Date.match(/\d{4}/)[0] &&
     piece.Nationality
   ) {
-    // console.log("piece", piece);
+    console.log("pieza arriba", piece.data);
     const year = parseInt(piece.Date.match(/\d{4}/)[0]);
     const {
       ObjectID,
@@ -184,19 +195,22 @@ const getPieceMOMA = index => {
       technic: Medium,
       classification: Classification,
       department: Department,
-      tags: []
+      tags: [],
+      rating: Math.floor(Math.random() * 300) + 100
     };
-    Piece.create(obj).catch(err => {
-      mongoose.disconnect();
-      throw err;
-    });
+    // Piece.update({ museumId: ObjectID, museum: "MOMA" }, obj, {
+    //   upsert: true
+    Piece.create(obj)
+      .then(piece => console.log("piezaMoma", piece))
+      .catch(err => {
+        mongoose.disconnect();
+        throw err;
+      });
   }
 };
 const metIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
-    setTimeout(() => {
-      getPieceMET(i);
-    }, 1000);
+    getPieceMET(i);
   }
 };
 const rmaIds = (startFrom, to) => {
@@ -204,22 +218,18 @@ const rmaIds = (startFrom, to) => {
     .fromFile(csvFilePath)
     .then(jsonObj => {
       for (let i = startFrom; i <= to; i++) {
-        setTimeout(() => {
-          const id = jsonObj[i].objectInventoryNumber;
-          getPieceRMA(id);
-        }, 1000);
+        const id = jsonObj[i].objectInventoryNumber;
+        getPieceRMA(id);
       }
     });
 };
 const momaIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
-    setTimeout(() => {
-      getPieceMOMA(i);
-    }, 1000);
+    getPieceMOMA(i);
   }
 };
-const start = 40001;
-const finish = 50000;
-metIds(start + 1, finish);
+const start = 150001;
+const finish = 200000;
+// metIds(start + 1, finish);
 // rmaIds(start, finish);
-// momaIds(start, finish);
+momaIds(start, finish);

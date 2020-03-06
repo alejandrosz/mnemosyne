@@ -130,7 +130,6 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state.resultsDetail);
     return (
       <React.Fragment>
         <div className="App">
