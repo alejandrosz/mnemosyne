@@ -25,7 +25,6 @@ const getPieceMET = id => {
   return axios
     .get(uriBaseMET + id)
     .then(result => {
-      console.log("result MET", id);
       // console.log("resultdata", result.data)
 
       if (result && result.data && result.data.primaryImageSmall !== "") {
@@ -100,7 +99,6 @@ const getPieceRMA = id => {
   return axios
     .get(uriBaseRMA + id + "?key=LfznSiay")
     .then(result => {
-      console.log("result RMA", id);
       if (
         result &&
         result.data &&
@@ -157,11 +155,11 @@ const getPieceMOMA = index => {
     piece.Date !== null &&
     piece.Date.length >= 4 &&
     piece.Date.match(/\d{4}/) &&
-    piece.Date.match(/\d{4}/)[0]
+    piece.Date.match(/\d{4}/)[0] &&
+    piece.Nationality
   ) {
     // console.log("piece", piece);
     const year = parseInt(piece.Date.match(/\d{4}/)[0]);
-    console.log(piece)
     const {
       ObjectID,
       Artist,
@@ -196,7 +194,9 @@ const getPieceMOMA = index => {
 };
 const metIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
-    getPieceMET(i);
+    setTimeout(() => {
+      getPieceMET(i);
+    }, 1000);
   }
 };
 const rmaIds = (startFrom, to) => {
@@ -204,18 +204,22 @@ const rmaIds = (startFrom, to) => {
     .fromFile(csvFilePath)
     .then(jsonObj => {
       for (let i = startFrom; i <= to; i++) {
-        const id = jsonObj[i].objectInventoryNumber;
-        getPieceRMA(id);
+        setTimeout(() => {
+          const id = jsonObj[i].objectInventoryNumber;
+          getPieceRMA(id);
+        }, 1000);
       }
     });
 };
 const momaIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
-    getPieceMOMA(i);
+    setTimeout(() => {
+      getPieceMOMA(i);
+    }, 1000);
   }
 };
-const start = 0;
-const finish = 1000;
-metIds(start + 1, finish);
-rmaIds(start, finish);
+const start = 20001;
+const finish = 30000;
+// metIds(start + 1, finish);
+// rmaIds(start, finish);
 momaIds(start, finish);

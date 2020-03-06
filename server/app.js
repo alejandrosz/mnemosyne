@@ -30,28 +30,15 @@ const debug = require("debug")(
 const app = express();
 
 // Middleware Setup
-// var whitelist = [
-//   'http://localhost:3000'
-// ];
-// var corsOptions = {
-//   origin: function(origin, callback){
-//       var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-//       callback(null, originIsWhitelisted);
-//   },
-//   credentials: true
-// };
-// app.use(cors(corsOptions));
+var corsOptions = {
+  origin: function(origin, callback){
+      // var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+      callback(null, true);
+  },
+  credentials: true
+};
+app.use(cors(corsOptions));
 
-app.use(
-  cors({
-    credentials: true,
-    origin: [
-      "https://mn3m0s1n3.herokuapp.com/",
-      "http://localhost:3000",
-      "http://mn3m0s1n3.herokuapp.com/"
-    ]
-  })
-);
 
 // Middleware Setup
 app.use(bodyParser.json());
@@ -83,6 +70,16 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // default value for title local
 app.locals.title = "Express - Generated with IronGenerator";
+
+// app.use(cors());
+
+// app.use(function (req, res, next) {	
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');    
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');    
+//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');   
+//   res.setHeader('Access-Control-Allow-Credentials', true);   
+//   next();
+// });
 
 const index = require("./routes/index");
 app.use("/api", index);
