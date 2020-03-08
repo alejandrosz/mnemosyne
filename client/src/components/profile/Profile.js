@@ -13,15 +13,23 @@ class Profile extends Component {
   state = { profile: {} };
 
   getProfile(user) {
-    console.log("callingrefetchprofile", user);
+    console.log("callingrefetchprofile", user, this.props.user);
     let useUser = user || this.props.user;
     if (useUser) {
       Axios.get(`${process.env.REACT_APP_API_URL}/profile/${useUser._id}`).then(
         gotUser => {
-          this.setState({ ...this.state, profile: gotUser.data });
+          this.setUserProfile(gotUser.data);
         }
       );
     }
+  }
+
+  setUserProfile(userData) {
+    this.setState({ ...this.state, profile: userData });
+    console.log(
+      "collections from back",
+      userData && userData.collections && userData.collections.length
+    );
   }
 
   componentWillReceiveProps(next) {
@@ -34,25 +42,32 @@ class Profile extends Component {
 
   render() {
     const { profile } = this.state;
-    console.log("user", this.props.user);
+    // console.log("user", this.props.user);
+    console.log(
+      "profile collections",
+      profile && profile.collections && profile.collections.length
+    );
 
     if (this.props.user) {
       return (
         <div className="Profile-style">
           <div className="Profile-top">
-            <h1>perfil de {this.props.user.username}</h1>
-            {profile && profile.collections && (
-              <Collections
-                user={this.props.user}
-                collections={profile.collections}
-                reFetch={() => this.getProfile()}
-              ></Collections>
-            )}
-            <Link to="/">
-              <h1>X</h1>
-            </Link>
-          </div>
-          <div className="Profile-body">
+            <div className="Profile-name">
+              {" "}
+              <h1>perfil de {this.props.user.username}</h1>
+              <Link to="/">
+                <h1>X</h1>
+              </Link>
+            </div>
+            <div>
+              {profile && profile.collections && (
+                <Collections
+                  user={this.props.user}
+                  collections={profile.collections}
+                  reFetch={() => this.getProfile()}
+                ></Collections>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -65,8 +80,7 @@ class Profile extends Component {
               <h1>X</h1>
             </Link>
           </div>
-          <div className="Profile-body">
-          </div>
+          <div className="Profile-body"></div>
         </div>
       );
     }

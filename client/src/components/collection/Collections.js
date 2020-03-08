@@ -16,20 +16,24 @@ class Collections extends Component {
 
   checkEnter(e) {
     if (e.keyCode === 13) {
-      Axios.post(
-        `${process.env.REACT_APP_API_URL}/collection/${this.props.user._id}`,
-        {
-          name: this.state.newCollection
-        }
-      ).then(() => this.props.reFetch());
+      this.sendName();
     }
   }
 
+  sendName() {
+    Axios.post(
+      `${process.env.REACT_APP_API_URL}/collection/${this.props.user._id}`,
+      {
+        name: this.state.newCollection
+      }
+    ).then((updatedUser) => this.props.reFetch(updatedUser.data));
+  }
+
   render() {
+    console.log("num collections", this.props.collections.length);
     return (
       <div className="collections-style">
         <div className="add-field">
-          {" "}
           <input
             type="text"
             placeholder="create new collection"
@@ -38,7 +42,7 @@ class Collections extends Component {
             onChange={e => this.updateNewCollection(e)}
             onKeyDown={e => this.checkEnter(e)}
           />
-          <button>add</button>
+          <button onClick={() => this.sendName()}>add</button>
         </div>
         {this.props.collections.map(collection => (
           <Collection

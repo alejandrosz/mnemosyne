@@ -88,10 +88,6 @@ router.put("/collection/add/:collectionId&:pieceId", (req, res, next) => {
     });
 });
 
-// let updatedCollections = user.collections.filter(
-//   c => c.toString() !== req.params.id
-// );
-
 router.put("/collection/del/:collectionId&:pieceId", (req, res, next) => {
   const collectionId = req.params.collectionId;
   const pieceId = req.params.pieceId;
@@ -113,6 +109,20 @@ router.put("/collection/del/:collectionId&:pieceId", (req, res, next) => {
     });
 });
 
+router.put("/piece/:id", (req, res, next) => {
+  let pieceId = req.params.id;
+  Pieces.findByIdAndUpdate(
+    { _id: pieceId },
+    { $inc: { rating: 1 } },
+    { new: true, returnNewDocument: true }
+  )
+    .then(updatedPiece => res.json(updatedPiece))
+    .catch(err => {
+      console.error("Error connecting to mongo");
+      next(err);
+    });
+});
+
 router.post("/collection/:id", (req, res, next) => {
   let newCollection = {
     name: req.body.name
@@ -122,31 +132,28 @@ router.post("/collection/:id", (req, res, next) => {
       updatedCollections = [...user.collections];
       updatedCollections.push(mongoose.Types.ObjectId(createdCollection.id));
       console.log("updatedCollections", updatedCollections);
+      Users.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $set: { collections: updatedCollections } },
+        { new: true, returnNewdocument: true }
+      ).then(updatedUser => res.json(updatedUser));
     });
-    Users.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: { collections: updatedCollections } },
-      { new: true, returnNewdocument: true }
-    ).then(updatedUser => res.json(updatedUser));
   });
 });
 
 router.delete("/collection/:id", (req, res, next) => {
-  Collections.findByIdAndDelete(req.params.id).then(
-    () => {
-      Users.findOne({ collections: req.params.id }).then(user => {
-        let updatedCollections = user.collections.filter(
-          c => c.toString() !== req.params.id
-        );
-        Users.findByIdAndUpdate(
-          { _id: user._id },
-          { $set: { collections: updatedCollections } },
-          { new: true, returnNewDocument: true }
-        ).then(updatedUser => res.json(updatedUser));
-      });
-    }
-    // res.json(collectionDelete)
-  );
+  Collections.findByIdAndDelete(req.params.id).then(() => {
+    Users.findOne({ collections: req.params.id }).then(user => {
+      let updatedCollections = user.collections.filter(
+        c => c.toString() !== req.params.id
+      );
+      Users.findByIdAndUpdate(
+        { _id: user._id },
+        { $set: { collections: updatedCollections } },
+        { new: true, returnNewDocument: true }
+      ).then(updatedUser => res.json(updatedUser));
+    });
+  });
 });
 
 module.exports = router;

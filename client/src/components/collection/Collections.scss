@@ -1,11 +1,23 @@
-.collections-style{
-  input{
-    width: 100%;
+.collections-style {
+  width: 50vw;
+  button {
+    color: white;
+    background-color: transparent;
+    width: 50px;
   }
-  .collectionCard{
-    margin-bottom: 20px;
-  }
-  .addField{
+  .add-field {
     display: flex;
+    // flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    input{
+      width: 100%;
+    }
+  }
+  // input {
+  //   // width: 100%;
+  // }
+  .collectionCard {
+    margin-bottom: 20px;
   }
 }

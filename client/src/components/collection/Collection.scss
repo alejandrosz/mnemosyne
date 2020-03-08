@@ -3,17 +3,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    button {
-      color: white;
-      background-color: transparent;
-      
-    }
+  
   }
   .collectionImages {
     display: flex;
     .imageSquare {
-      height: 80px;
-      width: 100px;
+      height: 12vh;
+      width: 25%;
       background-size: cover;
     }
   }

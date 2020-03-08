@@ -9,16 +9,7 @@ import "./D3Test2.scss";
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
-  state = { currentDepth: 0 };
-
-
-zoom (d) {
-
-
-
-  
-}
-
+  zoom(d) {}
 
   render() {
     let data = this.props.data;
@@ -110,7 +101,7 @@ zoom (d) {
       console.log("clicked: " + d.data.name + ", depth: " + d.depth);
 
       currentDepth = d.depth;
-      this.setState({ currentDepth });
+
       parent.datum(d.parent || nodes);
 
       x.domain([d.x0, d.x1]);
@@ -153,27 +144,14 @@ zoom (d) {
         .classed("hide", false);
     }
 
-   
-
-    if (this.state.currentDepth !== 0) {
-      return (
-        <div className="father">
-          <nav className="nav-bar-d3">
-            <div className="up">zoom out</div>
-          </nav>
-          <div className="feature" id="chart"></div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="father">
-          <nav className="nav-bar-d3">
-            <div className="up"></div>
-          </nav>
-          <div className="feature" id="chart"></div>
-        </div>
-      );
-    }
+    return (
+      <div className="father">
+        <nav className="nav-bar-d3">
+          <div className="up">zoom out</div>
+        </nav>
+        <div className="feature" id="chart"></div>
+      </div>
+    );
   }
 }
 export default D3Test2;
