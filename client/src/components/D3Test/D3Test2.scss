@@ -50,6 +50,7 @@ body {
   overflow: hidden;
 }
 .node {
+  border: 2px solid black;
   position: absolute;
   background: transparent url("") no-repeat 50% / cover;
   //border: 1px white solid;
@@ -89,6 +90,7 @@ body {
   }
   &.level-0 {
     z-index: 4;
+    
     font-size: 15vmin;
     display: none;
   }

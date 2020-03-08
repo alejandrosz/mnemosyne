@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { Route, Redirect } from "react-router-dom";
 import * as d3 from "d3";
 import "./D3Test2.scss";
+import { withRouter } from "react-router-dom";
+
 // import data from "./Dataset1";
 // import data2 from "./Dataset2";
 // import data from "./Dataset3";
@@ -9,7 +12,22 @@ import "./D3Test2.scss";
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
-  zoom(d) {}
+  constructor(props) {
+    super(props);
+    this.goDetail = this.goDetail.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    var chart = d3.select("#chart");
+    chart.selectAll("*").remove();
+  }
+
+  goDetail(d) {
+    let url = `/detail/${d.data._id}`;
+    console.log("detail", url);
+
+    return this.props.history.push(url);
+    // return <Route render={() => <Redirect to={url} />} />;
+  }
 
   render() {
     let data = this.props.data;
@@ -91,6 +109,34 @@ class D3Test2 extends Component {
     //.style("font-size", "")
     //.style("opacity", function(d) { return isOverflowed( d.parent ) ? 1 : 0; });
 
+    // function goDetail(d) {
+    //   console.log("detail", `${process.env.REACT_APP_URL}/detail/${d.data._id}`);
+    //   let url = `${process.env.REACT_APP_URL}/detail/${d.data._id}`;
+    //   return <Redirect to={url} />;
+    // }
+
+    cells // show this depth + 1 and below
+      .filter(function(d) {
+        return d.depth >= 5;
+      })
+      .append("button")
+      .on("click", this.goDetail)
+      .style("border", "50px solid #0000FF");
+
+    // .append("a")
+
+    // .append("rect")
+    // .attr("x", 50)
+    // .attr("y", 50)
+    // .attr("height", 50)
+    // .attr("width", 50)
+    // .style("fill", "lightgreen")
+    // .style("border", "50px solid #0000FF");
+
+    // <Link to=`/detail/${d.data._id}`>
+    //   {" "}
+    // </Link>;
+
     var parent = d3
       .select(".up")
       .datum(nodes)
@@ -154,4 +200,4 @@ class D3Test2 extends Component {
     );
   }
 }
-export default D3Test2;
+export default withRouter(D3Test2);

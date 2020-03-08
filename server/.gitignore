@@ -9,3 +9,5 @@ npm-debug.log
 
 dataRMA.csv
 dataMOMA.json
+objectsIdMET.json
+notUploadedMET.json

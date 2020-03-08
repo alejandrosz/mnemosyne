@@ -9,7 +9,7 @@ import Footer from "./components/footer/Footer";
 // import * as d3 from "d3";
 // import "../treeStyles.css"
 import Profile from "./components/profile/Profile";
-import Detail from "./Detail/Detail";
+import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
@@ -72,16 +72,18 @@ class App extends Component {
   // }
 
   searchMongo(e) {
-    if (e.key === 'Enter') {
-      axios.get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`).then(results => {
-        results = results.data;
-        if (results) {
-          const filteredResults = this.filterResults(results);
-          console.log('results filteredResults', results, filteredResults);
-          const tree = this.nestByMuseum(filteredResults);
-          this.setState({ resultsDetail: filteredResults, tree: tree });
-        }
-      });
+    if (e.key === "Enter") {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`)
+        .then(results => {
+          results = results.data;
+          if (results) {
+            const filteredResults = this.filterResults(results);
+            console.log("results filteredResults", results, filteredResults);
+            const tree = this.nestByMuseum(filteredResults);
+            this.setState({ resultsDetail: filteredResults, tree: tree });
+          }
+        });
     }
   }
   // /////////////////////////////
@@ -99,12 +101,14 @@ class App extends Component {
   }
   nestByMuseum(piecesArr) {
     const pieces = piecesArr;
-    const tree = { name: 'search', value: '', children: [] };
-    const museums = ['MET', 'MOMA', 'RMA'];
+    const tree = { name: "search", value: "", children: [] };
+    const museums = ["MET", "MOMA", "RMA"];
     museums.forEach(m => {
       const museumPieces = pieces.filter(p => p.museum === m);
       const bestImg = museumPieces[0] && museumPieces[0].imageUrl;
-      const nestedMuseum = museumPieces.length ? this.nestByDate(museumPieces) : [];
+      const nestedMuseum = museumPieces.length
+        ? this.nestByDate(museumPieces)
+        : [];
       // console.log('nestByMuseum', nestedMuseum);
       const childMuseum = {
         name: m,
@@ -115,9 +119,10 @@ class App extends Component {
       tree.children.push(childMuseum);
       // this.setState({ tree });
     });
-    console.log('tree', tree);
+    console.log("tree", tree);
     return tree;
   }
+
   nestByDate(museumPieces) {
     const mainDates = this.getDatesFromPieces(museumPieces);
     this.getDatesFromPieces(museumPieces);
@@ -125,13 +130,17 @@ class App extends Component {
     const nestedMuseum = [];
     mainDates.forEach((d, i) => {
       const datePieces = museumPieces.filter(p => {
-        if (d === 'noDate') {
+        if (d === "noDate") {
           return !Number.isInteger(p.year);
         }
-        return p.year >= d && (mainDates[i + 1] ? p.year < mainDates[i + 1] : true);
+        return (
+          p.year >= d && (mainDates[i + 1] ? p.year < mainDates[i + 1] : true)
+        );
       });
       const bestImg = datePieces[0] && datePieces[0].imageUrl;
-      const nestedDates = datePieces.length ? this.nestByOrigin(datePieces) : [];
+      const nestedDates = datePieces.length
+        ? this.nestByOrigin(datePieces)
+        : [];
       // console.log('nestedDates', nestedDates);
       const childDate = {
         name: d,
@@ -145,7 +154,9 @@ class App extends Component {
   }
   getDatesFromPieces(museumPieces) {
     const allYears = museumPieces.map(p => p.year);
-    const piecesWithDate = allYears.filter(y => Number.isInteger(y)).sort((a, b) => a - b);
+    const piecesWithDate = allYears
+      .filter(y => Number.isInteger(y))
+      .sort((a, b) => a - b);
     const piecesWithNoDate = allYears.filter(y => !Number.isInteger(y));
     // console.log('piecesWithDate', piecesWithDate, piecesWithNoDate);
     const number = 4;
@@ -160,13 +171,13 @@ class App extends Component {
       years.push(piecesWithDate[piecesWithDate.length - 1]);
     }
     if (piecesWithNoDate.length) {
-      years.push('noDate');
+      years.push("noDate");
     }
-    console.log('years', years);
+    console.log("years", years);
     return years;
   }
   nestByOrigin(datePieces) {
-    const origins = [];
+    const origins = ["noOrigin"];
     const nestedDates = [];
     datePieces.forEach(p => {
       if (p.origin.length) {
@@ -178,29 +189,36 @@ class App extends Component {
         origins.sort();
       }
     });
+    // console.log('--- origins', origins);
+    console.log("nestByOrigin All", datePieces.length);
     origins.forEach((o, i) => {
-      const prevOrigins = i > 0 ? origins.slice(0, i - 1) : [];
-      const originPieces = datePieces.filter(
-        p => !prevOrigins.includes[p.origin] && p.origin.includes(o)
-      );
-      console.log(
-        'currOrigin',
-        o,
-        'prevOrigins',
-        prevOrigins,
-        'filtered',
-        originPieces.map(p => p.origin)
-      );
+      const prevOrigins = i > 0 ? origins.slice(0, i) : [];
+      const originPieces = datePieces.filter(p => {
+        if (p.origin.length <= 0 && o === "noOrigin") {
+          return true;
+        }
+        return (
+          p.origin.includes(o) &&
+          !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or])
+        );
+      });
+      /* console.log('-- currOrigin', o, 'prevOrigins', prevOrigins, 'filtered', [
+        ...originPieces.map(p => p.origin)
+      ]); */
       const bestImg = originPieces[0] && originPieces[0].imageUrl;
-      const nestedOrigins = originPieces.length ? this.nestByAuthor(originPieces) : [];
-      // console.log('nestByOrigin', nestedOrigins);
+      const nestedOrigins = originPieces.length
+        ? this.nestByAuthor(originPieces)
+        : [];
+      console.log("nestByOrigin", nestedOrigins.length, o);
       const childDate = {
         name: o,
         value: bestImg,
         children: nestedOrigins || [],
         size: originPieces.length
       };
-      nestedDates.push(childDate);
+      if (nestedOrigins.length > 0) {
+        nestedDates.push(childDate);
+      }
     });
     return nestedDates;
   }
@@ -217,7 +235,8 @@ class App extends Component {
         .filter(p => p.author)
         .map(p => {
           p.value = p.imageUrl;
-          p.size = 1;
+          p.size = p.rating * 0.1;
+          // p.size = 1;
           return p;
         });
       // console.log('nestByAuthor', authorPieces);
@@ -228,21 +247,22 @@ class App extends Component {
         children: authorPieces || [],
         size: authorPieces.length
       };
-      nestedDates.push(childDate);
+      if (authorPieces.length > 0) {
+        nestedDates.push(childDate);
+      }
     });
     return nestedDates;
   }
 
-  getData(results) {
-    let data = results.map(result => ({
-      name: result.name,
-      value: result.imageUrl
-    }));
-    this.setState({ resultsDetail: { children: data } });
-    console.log("state", this.state.resultsDetail);
-  }
+  // getData(results) {
+  //   let data = results.map(result => ({
+  //     name: result.name,
+  //     value: result.imageUrl
+  //   }));
+  //   this.setState({ resultsDetail: { children: data } });
+  //   console.log("state", this.state.resultsDetail);
+  // }
 
-  
   render() {
     return (
       <React.Fragment>
@@ -257,33 +277,14 @@ class App extends Component {
           />
           <Switch>
             <Route
-              exact
-              path="/"
-              // render={() => (
-              //   // <Contents
-              //   // totalItems={this.state.resultsDetail.length}
-              //   // query={this.state.resultsDetail}
-              //   // />
-              //   )}
+              path="/detail/:id"
+              render={() => <DetailPiece user={this.state.loggedInUser} />}
             />
+            {/* <Route  path="/" /> */}
             <Route
               // path="/profile/:id"
               path="/profile"
-              render={() => (
-                <Profile
-                  className="profilecomponent"
-                  user={this.state.loggedInUser}
-                />
-              )}
-            />
-            <Route
-              path="/detail"
-              render={() => (
-                <Detail
-                  className="profilecomponent"
-                  user={this.state.loggedInUser}
-                />
-              )}
+              render={() => <Profile user={this.state.loggedInUser} />}
             />
           </Switch>
           <Footer

@@ -4,6 +4,9 @@ const csv = require("csvtojson");
 const mongoose = require("mongoose");
 const Piece = require("../models/Piece");
 const dataMOMA = require("../dataMOMA.json");
+// const idsMET = require("../objectsIdMET.json")
+const idsMET = require("../notUploadedMET.json")
+
 // import { format } from 'url';
 mongoose
   .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
@@ -21,6 +24,8 @@ const uriBaseRMA = "https://www.rijksmuseum.nl/api/en/collection/";
 const csvFilePath =
   "/Users/laura/Documents/Ironhack/w8d1/mnemosyne/server/dataRMA.csv";
 
+
+  
 const getPieceMET = id => {
   return axios
     .get(uriBaseMET + id)
@@ -105,7 +110,7 @@ const getPieceRMA = id => {
   return axios
     .get(uriBaseRMA + id + "?key=LfznSiay")
     .then(result => {
-      // console.log("piece rma", result.data);
+      console.log("piece rma", result.data);
 
       if (
         result &&
@@ -217,16 +222,14 @@ const metIds = (startFrom, to) => {
   var i = 0;
   var maxTimes = to - startFrom;
   function increaseTime() {
-    getPieceMET(startFrom + i);
+    const id = idsMET[startFrom + i]
+    getPieceMET(id);
     i++;
     if (i === maxTimes) {
       clearInterval(intervalID);
     }
   }
-  var intervalID = setInterval(increaseTime, 500);
-  /* for (let i = startFrom; i <= to; i++) {
-    getPieceMET(i);
-  } */
+  var intervalID = setInterval(increaseTime, 200);
 };
 
 const rmaIds = (startFrom, to) => {
@@ -243,7 +246,7 @@ const rmaIds = (startFrom, to) => {
           clearInterval(intervalID);
         }
       }
-      var intervalID = setInterval(increaseTime, 1000);
+      var intervalID = setInterval(increaseTime, 500);
     });
 };
 
@@ -252,18 +255,8 @@ const momaIds = (startFrom, to) => {
     getPieceMOMA(i);
   }
 };
-const start = 250000;
-const finish = 300000;
+const start = 0;
+const finish = 50000;
 metIds(start + 1, finish);
 // rmaIds(start, finish);
 // momaIds(start, finish);
-
-// var times = 0;
-// var maxTimes = finish - start;
-// function increaseTime() {
-//   times++;
-//   if (times === maxTimes) {
-//     clearInterval(intervalID);
-//   }
-// }
-// var intervalID = setInterval(increaseTime, 1000);

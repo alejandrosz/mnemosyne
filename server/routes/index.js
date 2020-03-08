@@ -56,14 +56,14 @@ router.get("/profile/:id", (req, res, next) => {
 //     });
 // });
 
-// router.get("/item/:id", (req, res, next) => {
-//   Items.findById(req.params.id)
-//     .then(itemFound => res.json(itemFound))
-//     .catch(err => {
-//       console.error("Error connecting to mongo");
-//       next(err);
-//     });
-// });
+router.get("/piece/:id", (req, res, next) => {
+  Pieces.findById(req.params.id)
+    .then(pieceFound => res.json(pieceFound))
+    .catch(err => {
+      console.error("Error connecting to mongo");
+      next(err);
+    });
+});
 
 router.put("/collection/add/:collectionId&:pieceId", (req, res, next) => {
   const collectionId = req.params.collectionId;
