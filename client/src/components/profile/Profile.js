@@ -53,7 +53,6 @@ class Profile extends Component {
             </Link>
           </div>
           <div className="Profile-body">
-            <p>texto dentro del perfil de {this.props.user.username}</p>
           </div>
         </div>
       );
@@ -67,7 +66,6 @@ class Profile extends Component {
             </Link>
           </div>
           <div className="Profile-body">
-            <p>texto dentro del perfil de </p>
           </div>
         </div>
       );

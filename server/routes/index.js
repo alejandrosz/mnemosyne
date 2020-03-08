@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/User");
-const Items = require("../models/Item");
 const Collections = require("../models/Collection");
 const Pieces = require("../models/Piece");
 const mongoose = require("mongoose");
@@ -66,6 +65,54 @@ router.get("/profile/:id", (req, res, next) => {
 //     });
 // });
 
+router.put("/collection/add/:collectionId&:pieceId", (req, res, next) => {
+  const collectionId = req.params.collectionId;
+  const pieceId = req.params.pieceId;
+
+  Collections.findById(collectionId)
+    .then(collection => {
+      updatedPieces = [...collection.pieces];
+      updatedPieces.push(mongoose.Types.ObjectId(pieceId));
+      console.log(updatedPieces);
+    })
+    .then(() => {
+      Collections.findByIdAndUpdate(
+        { _id: collectionId },
+        { $set: { pieces: updatedPieces } },
+        { new: true, returnNewDocument: true }
+      ).then(updatedCollection => res.json(updatedCollection));
+    })
+    .catch(err => {
+      console.error("Error connecting to mongo");
+      next(err);
+    });
+});
+
+// let updatedCollections = user.collections.filter(
+//   c => c.toString() !== req.params.id
+// );
+
+router.put("/collection/del/:collectionId&:pieceId", (req, res, next) => {
+  const collectionId = req.params.collectionId;
+  const pieceId = req.params.pieceId;
+
+  Collections.findById(collectionId)
+    .then(collection => {
+      let updatedPieces = collection.pieces.filter(
+        p => p._id.toString() !== pieceId
+      );
+      Collections.findByIdAndUpdate(
+        { _id: collectionId },
+        { $set: { pieces: updatedPieces } },
+        { new: true, returnNewDocument: true }
+      ).then(updatedCollection => res.json(updatedCollection));
+    })
+    .catch(err => {
+      console.error("Error connecting to mongo");
+      next(err);
+    });
+});
+
 router.post("/collection/:id", (req, res, next) => {
   let newCollection = {
     name: req.body.name
@@ -84,16 +131,6 @@ router.post("/collection/:id", (req, res, next) => {
   });
 });
 
-// router.post("/item/:id", (req, res, next) => {
-//   let newItem = {
-//     name: req.body.name,
-//     image: req.body.url,
-//     api: req.body.api
-//     //id??
-//   };
-//   Collections.findByIdAndUpdate(req.params.id, newItem);
-// });
-
 router.delete("/collection/:id", (req, res, next) => {
   Collections.findByIdAndDelete(req.params.id).then(
     () => {
@@ -111,10 +148,5 @@ router.delete("/collection/:id", (req, res, next) => {
     // res.json(collectionDelete)
   );
 });
-
-
-// router.delete("/item/:id", (req, res, next) => {
-//   Items.findByIdAndDelete(req.params.id);
-// });
 
 module.exports = router;

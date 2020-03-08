@@ -26,23 +26,26 @@ class Collections extends Component {
   }
 
   render() {
-    console.log("collections", this.props.reFetch);
     return (
       <div className="collections-style">
+        <div className="add-field">
+          {" "}
+          <input
+            type="text"
+            placeholder="create new collection"
+            id="create-collection"
+            value={this.state.newCollection}
+            onChange={e => this.updateNewCollection(e)}
+            onKeyDown={e => this.checkEnter(e)}
+          />
+          <button>add</button>
+        </div>
         {this.props.collections.map(collection => (
           <Collection
             collection={collection}
             reFetch={this.props.reFetch}
           ></Collection>
         ))}
-        <input
-          type="text"
-          placeholder="create new collection"
-          id="create-collection"
-          value={this.state.newCollection}
-          onChange={e => this.updateNewCollection(e)}
-          onKeyDown={e => this.checkEnter(e)}
-        />
       </div>
     );
   }
