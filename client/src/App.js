@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import "./App.scss";
 import "../src/components/treeStyles.css";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import AuthService from "./components/auth/AuthService";
-import Contents from "./components/contents/Contents";
 import axios from "axios";
 import Footer from "./components/footer/Footer";
 // import * as d3 from "d3";
 // import "../treeStyles.css"
-import SimpleTreemapExample from "./components/simpleTreemap";
 import Profile from "./components/profile/Profile";
 import Detail from "./Detail/Detail";
 import D3Test2 from "./components/D3Test/D3Test2";
@@ -153,6 +151,7 @@ class App extends Component {
               //   )}
             />
             <Route
+              // path="/profile/:id"
               path="/profile"
               render={() => (
                 <Profile

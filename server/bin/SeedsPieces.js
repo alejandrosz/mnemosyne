@@ -25,7 +25,7 @@ const getPieceMET = id => {
   return axios
     .get(uriBaseMET + id)
     .then(result => {
-      // console.log("resultdata", result.data)
+      console.log("resultdata met", result.data)
 
       if (result && result.data && result.data.primaryImageSmall !== "") {
         const {
@@ -98,6 +98,9 @@ const getPieceMET = id => {
       console.log(err);
     });
 };
+
+
+
 const getPieceRMA = id => {
   return axios
     .get(uriBaseRMA + id + "?key=LfznSiay")
@@ -159,6 +162,7 @@ const getPieceRMA = id => {
 
 const getPieceMOMA = index => {
   const piece = dataMOMA[index];
+  console.log(piece);
   if (
     piece &&
     piece.ThumbnailURL !== "" &&
@@ -169,7 +173,6 @@ const getPieceMOMA = index => {
     piece.Date.match(/\d{4}/)[0] &&
     piece.Nationality
   ) {
-    console.log("pieza arriba", piece.data);
     const year = parseInt(piece.Date.match(/\d{4}/)[0]);
     const {
       ObjectID,
@@ -203,33 +206,64 @@ const getPieceMOMA = index => {
     Piece.create(obj)
       .then(piece => console.log("piezaMoma", piece))
       .catch(err => {
+        console.log(err);
         mongoose.disconnect();
         throw err;
       });
   }
 };
+
 const metIds = (startFrom, to) => {
-  for (let i = startFrom; i <= to; i++) {
-    getPieceMET(i);
+  var i = 0;
+  var maxTimes = to - startFrom;
+  function increaseTime() {
+    getPieceMET(startFrom + i);
+    i++;
+    if (i === maxTimes) {
+      clearInterval(intervalID);
+    }
   }
+  var intervalID = setInterval(increaseTime, 500);
+  /* for (let i = startFrom; i <= to; i++) {
+    getPieceMET(i);
+  } */
 };
+
 const rmaIds = (startFrom, to) => {
   csv()
     .fromFile(csvFilePath)
     .then(jsonObj => {
-      for (let i = startFrom; i <= to; i++) {
-        const id = jsonObj[i].objectInventoryNumber;
+      var i = 0;
+      var maxTimes = to - startFrom;
+      function increaseTime() {
+        const id = jsonObj[startFrom + i].objectInventoryNumber;
         getPieceRMA(id);
+        i++;
+        if (i === maxTimes) {
+          clearInterval(intervalID);
+        }
       }
+      var intervalID = setInterval(increaseTime, 1000);
     });
 };
+
 const momaIds = (startFrom, to) => {
   for (let i = startFrom; i <= to; i++) {
     getPieceMOMA(i);
   }
 };
-const start = 150001;
-const finish = 200000;
-// metIds(start + 1, finish);
+const start = 250000;
+const finish = 300000;
+metIds(start + 1, finish);
 // rmaIds(start, finish);
-momaIds(start, finish);
+// momaIds(start, finish);
+
+// var times = 0;
+// var maxTimes = finish - start;
+// function increaseTime() {
+//   times++;
+//   if (times === maxTimes) {
+//     clearInterval(intervalID);
+//   }
+// }
+// var intervalID = setInterval(increaseTime, 1000);

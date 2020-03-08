@@ -1,13 +1,28 @@
 .Profile-style {
+  @keyframes appear {
+    0% {
+      // backdrop-filter: 0;
+      // -webkit-box-shadow: 0;
+      // -moz-box-shadow: 0;
+      // box-shadow: 0;
+    }
+    100% {
+      backdrop-filter: blur(5px);
+      -webkit-box-shadow: inset 0px 0px 200px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: inset 0px 0px 200px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0px 0px 200px rgba(0, 0, 0, 0.4);
+    }
+  }
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-  background-color: black;
-  color:white;
-  position:fixed;
-  top:0;
+  animation: 1s ease-out 0s 1 forwards appear;
+  // background-color: black;
+  color: white;
+  position: fixed;
+  top: 0;
   z-index: 10;
 }
 

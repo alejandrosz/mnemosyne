@@ -13,34 +13,35 @@ class Footer extends Component {
     this.state = { loggedInUser: null, isSignup: false, tags: [] };
   }
 
-  componentWillReceiveProps() {
-    this.getTags();
-  }
+  // componentWillReceiveProps() {
+  //   this.getTags();
+  // }
 
-  getTags() {
-    const tags = [];
-    this.props.tags.forEach(function(item) {
-      item.tags.forEach(function(tag) {
-        tags.push(tag.term);
-      });
-    });
-    const uniqueTags = [...new Set(tags)];
-    this.setState({ ...this.state, tags: uniqueTags });
-  }
+  // getTags() {
+  //   console.log("tags", this.props.tags)
+  //   const tags = [];
+  //   this.props.tags.forEach(function(item) {
+  //     item.tags.forEach(function(tag) {
+  //       tags.push(tag.term);
+  //     });
+  //   });
+  //   const uniqueTags = [...new Set(tags)];
+  //   this.setState({ ...this.state, tags: uniqueTags });
+  // }
 
   render() {
     return (
       <div className="footer-style">
-        <input
+        <input className="search-bar"
           type="text"
           onKeyDown={e => this.props.searchMongo(e)}
           placeholder="search"
         ></input>
         <select name="filterlist" form="filterform">
           <option value="1">Filters</option>
-          {this.state.tags.map(tag => (
+          {/* {this.state.tags.map(tag => (
             <option value={tag}>{tag}</option>
-          ))}
+          ))} */}
         </select>
         {/* const Slider = () => (
         <Nouislider range={{ min: 0, max: 100 }} start={[20, 80]} connect />

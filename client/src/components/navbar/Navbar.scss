@@ -1,29 +1,40 @@
-.nav-style  {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 5px;
-	height: 3vh;
-	background-color: black;
-	color: white;
+.nav-style {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px;
+  height: 3vh;
+  // background-color: black;
+  color: white;
+  right: 0;
 }
 
 .change-style {
-	background-color: black;
-	color: white;
-	border: none;
-	font-size: 0.6rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 0.6rem;
 }
 
 .user-buttons {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .profile-navbar {
+
   display: flex;
   h1 {
     margin-right: 5px;
     font-weight: bold;
   }
+  a:link {
+    text-decoration: none !important;
+  }
+}
 
+nav {
+  position: fixed;
+  // width: 50vw;
+  top: 0;
+  z-index: 100;
 }

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Item = require("../models/Item");
+const Piece = require("../models/Piece");
 
 const collectionSchema = new Schema({
   name: String,
-  items: [{ type: Schema.Types.ObjectId, ref: "Item" }]
+  pieces: [{ type: Schema.Types.ObjectId, ref: "Piece" }]
 });
 
 const Collection = mongoose.model("Collection", collectionSchema);

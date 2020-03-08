@@ -1,19 +1,27 @@
 @import "reset.css";
-
+*:focus {
+  outline: none;
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 
 a {
   color: white;
   cursor: pointer;
-  text-decoration: none;
+}
+a:link {
+  text-decoration: none !important;
 }
 
 .App {
+  // background: url(https://images.adsttc.com/media/images/5939/3484/e58e/ce9b/3000/02ae/slideshow/Aby_Warburg.jpg?1496921216);
+  // background-size: auto;
   // display: flex;
   // justify-content: center;
   .Profile-style {
     margin: 0 auto;
+    z-index: 200;
   }
 }

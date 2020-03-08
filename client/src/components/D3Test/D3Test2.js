@@ -3,14 +3,25 @@ import * as d3 from "d3";
 import "./D3Test2.scss";
 // import data from "./Dataset1";
 // import data2 from "./Dataset2";
-import data from "./Dataset3";
+// import data from "./Dataset3";
 // import data from "./Dataset4";
 
 // import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
+  state = { currentDepth: 0 };
+
+
+zoom (d) {
+
+
+
+  
+}
+
+
   render() {
-    // let data = this.props.data;
+    let data = this.props.data;
     var width = 100, // % of the parent element
       height = 100,
       x = d3
@@ -93,13 +104,13 @@ class D3Test2 extends Component {
       .select(".up")
       .datum(nodes)
       .on("click", zoom);
-
     function zoom(d) {
       // http://jsfiddle.net/ramnathv/amszcymq/
 
       console.log("clicked: " + d.data.name + ", depth: " + d.depth);
 
       currentDepth = d.depth;
+      this.setState({ currentDepth });
       parent.datum(d.parent || nodes);
 
       x.domain([d.x0, d.x1]);
@@ -107,7 +118,9 @@ class D3Test2 extends Component {
 
       var t = d3
         .transition()
-        .duration(Math.floor(Math.random() * 2200) + 1200)
+        // .duration(Math.floor(Math.random() * 2200) + 1200)
+        .duration(1200)
+
         .ease(d3.easeCubicOut);
 
       cells
@@ -140,14 +153,27 @@ class D3Test2 extends Component {
         .classed("hide", false);
     }
 
-    return (
-      <div className="father">
-        <nav>
-          <div className="up">&larr; UP</div>
-        </nav>
-        <div className="feature" id="chart"></div>
-      </div>
-    );
+   
+
+    if (this.state.currentDepth !== 0) {
+      return (
+        <div className="father">
+          <nav className="nav-bar-d3">
+            <div className="up">zoom out</div>
+          </nav>
+          <div className="feature" id="chart"></div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="father">
+          <nav className="nav-bar-d3">
+            <div className="up"></div>
+          </nav>
+          <div className="feature" id="chart"></div>
+        </div>
+      );
+    }
   }
 }
 export default D3Test2;

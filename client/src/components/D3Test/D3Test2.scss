@@ -1,7 +1,7 @@
 $m: 0; // margin
 .father {
   height: 90vh;
-  weight: 100vw;
+  width: 100vw;
 }
 *,
 *:before,
@@ -14,22 +14,29 @@ body {
   height: 100%;
   margin: 0;
 }
-nav {
+.nav-bar-d3 {
   position: fixed;
   width: 100%;
   top: 0;
-  padding: 16px;
-  z-index: 100;
+  // top: calc(100vh - 100px - 3vh);
+  // padding-top: 2vw;
+  z-index: 50;
+  
   .up {
     font: bold 14px/1 sans-serif;
     color: white;
-    width: 92px;
-    padding: 8px;
-    background-color: hsla(350, 80, 50, 0.8);
+    height: 3vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    background-color: rgba(228, 228, 228, 0.8);
     float: left;
+    // background-image:
+    // linear-gradient(to bottom, rgba(92,47,90,1), rgba(92,47,90,0));
     cursor: pointer;
     &:hover {
-      background-color: hsla(350, 80, 40, 0.8);
+      background-color: rgba(173, 173, 173, 0.8);
     }
   }
 }

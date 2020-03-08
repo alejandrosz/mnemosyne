@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import AuthService from "./AuthService";
+import "./Login.scss";
 
 class Login extends Component {
   constructor(props) {
@@ -42,30 +43,29 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>name</label>
+      <div className="login-form">
+        <p>{this.state.error ? "error " : ""}</p>
+        <form className="loginForm" onSubmit={this.handleFormSubmit}>
+          {/* <label>name</label> */}
           <input
             type="text"
             name="username"
             value={this.state.username}
             onChange={e => this.handleChange(e)}
-            placeholder="name"
+            placeholder="name:"
           />
 
-          <label>pass</label>
+          {/* <label>pass</label> */}
           <input
             type="password"
             name="password"
             value={this.state.password}
             onChange={e => this.handleChange(e)}
-            placeholder="pass"
+            placeholder="| password:"
           />
 
           <input type="submit" value="Login" />
         </form>
-
-        <h1>{this.state.error ? "Error" : ""}</h1>
       </div>
     );
   }
