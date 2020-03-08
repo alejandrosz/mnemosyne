@@ -23,8 +23,6 @@ class D3Test2 extends Component {
 
   goDetail(d) {
     let url = `/detail/${d.data._id}`;
-    console.log("detail", url);
-
     return this.props.history.push(url);
     // return <Route render={() => <Redirect to={url} />} />;
   }
@@ -144,7 +142,7 @@ class D3Test2 extends Component {
     function zoom(d) {
       // http://jsfiddle.net/ramnathv/amszcymq/
 
-      console.log("clicked: " + d.data.name + ", depth: " + d.depth);
+      // console.log("clicked: " + d.data.name + ", depth: " + d.depth);
 
       currentDepth = d.depth;
 

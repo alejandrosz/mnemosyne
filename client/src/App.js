@@ -198,8 +198,8 @@ class App extends Component {
           return true;
         }
         return (
-          p.origin.includes(o) &&
-          !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or])
+          p.origin.includes(o) /* &&
+          !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or]) */
         );
       });
       /* console.log('-- currOrigin', o, 'prevOrigins', prevOrigins, 'filtered', [
@@ -278,13 +278,13 @@ class App extends Component {
           <Switch>
             <Route
               path="/detail/:id"
-              render={() => <DetailPiece user={this.state.loggedInUser} />}
+              render={({ match }) => <DetailPiece user={this.state.loggedInUser} match={ match }/>}
             />
             {/* <Route  path="/" /> */}
             <Route
               // path="/profile/:id"
               path="/profile"
-              render={() => <Profile user={this.state.loggedInUser} />}
+              render={(props) => <Profile user={this.state.loggedInUser} {...props}/>}
             />
           </Switch>
           <Footer

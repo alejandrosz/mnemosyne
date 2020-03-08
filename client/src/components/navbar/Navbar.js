@@ -29,8 +29,8 @@ class Navbar extends Component {
   }
 
   render() {
-    this.state.loggedInUser &&
-      console.log("navbar", this.state.loggedInUser._id);
+    // this.state.loggedInUser &&
+    //   console.log("navbar", this.state.loggedInUser._id);
     return (
       <nav className="nav-style">
         {/* <input

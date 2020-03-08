@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import "./DetailPiece.scss";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 import Axios from "axios";
+
+// import { useRouteMatch } from "react-router-dom";
+
+// function BlogPost() {
+
+//   // Do whatever you want with the match...
+//   return <div />;
+// }
 
 class DetailPiece extends Component {
   state = { piece: {} };
 
-  // componentDidMount() {
-  //   Axios.get(
-  //     `${process.env.REACT_APP_API_URL}/detail/${this.props.match.params.id}`
-  //   ).then(pieceFound => {
-  //     this.setState({ piece: pieceFound });
-  //   });
-  // }
+  componentDidMount() {
+    // let match = useRouteMatch("/blog/:slug");
+    // console.log(match);
+    console.log("props", this.props);
+    Axios
+      .get
+      // `${process.env.REACT_APP_API_URL}/detail/${this.props.match.params.id}`
+      ()
+      .then(pieceFound => {
+        console.log("piecefound", pieceFound);
+        this.setState({ piece: pieceFound });
+      });
+  }
 
   render() {
     return (

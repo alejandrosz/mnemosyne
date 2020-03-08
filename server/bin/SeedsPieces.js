@@ -255,8 +255,8 @@ const momaIds = (startFrom, to) => {
     getPieceMOMA(i);
   }
 };
-const start = 0;
-const finish = 50000;
+const start = 50000;
+const finish = 120000;
 metIds(start + 1, finish);
 // rmaIds(start, finish);
 // momaIds(start, finish);

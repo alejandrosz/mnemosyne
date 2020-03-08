@@ -8,24 +8,33 @@ const mongoose = require("mongoose");
 router.get("/pieces/:filter", (req, res, next) => {
   let filter = req.params.filter;
   Pieces.find({
-    $or: [
-      { name: new RegExp(filter, "gi") },
-      { museum: new RegExp(filter, "gi") },
-      { description: new RegExp(filter, "gi") },
-      { author: new RegExp(filter, "gi") },
-      // { year: new RegExp(filter, "gi") },
-      { period: new RegExp(filter, "gi") },
-      { culture: new RegExp(filter, "gi") },
-      { origin: new RegExp(filter, "gi") },
-      { technic: new RegExp(filter, "gi") },
-      { classification: new RegExp(filter, "gi") },
-      { department: new RegExp(filter, "gi") },
-      { tags: new RegExp(filter, "gi") }
+    $and: [
+      {
+        $or: [
+          { name: new RegExp(filter, "gi") },
+          { museum: new RegExp(filter, "gi") },
+          { description: new RegExp(filter, "gi") },
+          { author: new RegExp(filter, "gi") },
+          // { year: new RegExp(filter, "gi") },
+          { period: new RegExp(filter, "gi") },
+          { culture: new RegExp(filter, "gi") },
+          { origin: new RegExp(filter, "gi") },
+          { technic: new RegExp(filter, "gi") },
+          { classification: new RegExp(filter, "gi") },
+          { department: new RegExp(filter, "gi") },
+          { tags: new RegExp(filter, "gi") }
+        ]
+      },
+      // { origin: { $size: { $gt: 0 } } }
+      { "origin.0": { $exists: true } }
     ]
   })
+    .sort({ rating: 1 })
+    .limit(100)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
-      console.error("Error connecting to mongo");
+      console.error("Error on search", err.message);
+      console.error(err);
       next(err);
     });
 });
