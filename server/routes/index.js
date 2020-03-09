@@ -30,7 +30,7 @@ router.get("/pieces/:filter", (req, res, next) => {
     ]
   })
     .sort({ rating: 1 })
-    .limit(50)
+    .limit(20)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error on search", err.message);
@@ -55,15 +55,15 @@ router.get("/profile/:id", (req, res, next) => {
     });
 });
 
-// router.get("/collection/:id", (req, res, next) => {
-//   Collections.findById(req.params.id)
-//     .populate("items")
-//     .then(collectionFound => res.json(collectionFound))
-//     .catch(err => {
-//       console.error("Error connecting to mongo");
-//       next(err);
-//     });
-// });
+router.get("/collection/:id", (req, res, next) => {
+  Collections.findById(req.params.id)
+    .populate("pieces")
+    .then(collectionFound => res.json(collectionFound))
+    .catch(err => {
+      console.error("Error connecting to mongo");
+      next(err);
+    });
+});
 
 router.get("/piece/:id", (req, res, next) => {
   Pieces.findById(req.params.id)

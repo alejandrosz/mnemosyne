@@ -1,4 +1,33 @@
 .detailPiece {
+  h1{
+    font-weight: bold;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    // background: #f1f1f1;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:rgba(255, 255, 255, 0.9);
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.95);
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+  }
+
+  .detail-text {
+    width: 30vw;
+    height: 30vh;
+    overflow-y: auto;
+  }
   @keyframes appear {
     0% {
       // backdrop-filter: 0;

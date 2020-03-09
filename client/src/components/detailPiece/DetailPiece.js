@@ -106,6 +106,22 @@ class DetailPiece extends Component {
   render() {
     console.log("props user", this.props.user);
     console.log("image", this.state.piece.imageUrl);
+    let {
+      origin,
+      technic,
+      tags,
+      museum,
+      name,
+      imageUrl,
+      description,
+      author,
+      year,
+      culture,
+      classification,
+      rating,
+      department
+    } = this.state.piece;
+    console.log("piece id", this.state.piece._id);
 
     return (
       <div className="detailPiece">
@@ -118,55 +134,87 @@ class DetailPiece extends Component {
               <h1>X</h1>
             </Link>
           </div>
-          <img src={this.state.piece.imageUrl} alt="image" />
-          <h1>&hearts;{this.state.piece.rating}</h1>
-          <p>{this.state.piece.name}</p>
-          <p>
-            {this.state.piece.author} {this.state.piece.year}
-          </p>
-          <p>{this.state.piece.museum}</p>
-          <button onClick={this.addLike}>like</button>
+          <img src={imageUrl} alt="image" />
+          <h1>&hearts;{rating}</h1>{" "}
           {this.state.isSaved ? <h1> saved</h1> : <h1>not saved</h1>}
+          <button onClick={this.addLike}>like</button>
           {/* {this.state &&
           this.state.user &&
           this.state.user.collections &&
           this.state.user.collections.some(collection =>
-            collection.pieces.find(this.state.piece._id)
-          ) ? ( */}
-          <div class="dropdown">
-            <button class="dropbtn">Delete</button>
-            <div class="dropdown-content">
-              {this.state &&
-                this.state.user &&
-                this.state.user.collections &&
-                this.state.user.collections.map(collection => (
-                  <button
-                    onClick={() => this.deleteCollection(collection._id)}
-                    class="droppedbtn"
-                  >
-                    {collection.name}
-                  </button>
-                ))}
+            collection.pieces.find(this.state.piece._id) */}
+          {this.state &&
+          this.state.user &&
+          this.state.user.collections &&
+          this.state.user.collections.some(collection =>
+            collection.pieces
+              .map(piece => piece._id)
+              .find(id => id === this.state.piece._id)
+          ) ? (
+            <div class="dropdown">
+              <button class="dropbtn">Delete</button>
+              <div class="dropdown-content">
+                {this.state &&
+                  this.state.user &&
+                  this.state.user.collections &&
+                  this.state.user.collections.map(collection => (
+                    <button
+                      onClick={() => this.deleteCollection(collection._id)}
+                      class="droppedbtn"
+                    >
+                      {collection.name}
+                    </button>
+                  ))}
+              </div>
             </div>
-          </div>
-          {/* ) : ( */}
-          <div class="dropdown">
-            <button class="dropbtn">Add</button>
-            <div class="dropdown-content">
-              {this.state &&
-                this.state.user &&
-                this.state.user.collections &&
-                this.state.user.collections.map(collection => (
-                  <button
-                    onClick={() => this.addCollection(collection._id)}
-                    class="droppedbtn"
-                  >
-                    {collection.name}
-                  </button>
-                ))}
+          ) : (
+            <div class="dropdown">
+              <button class="dropbtn">Add</button>
+              <div class="dropdown-content">
+                {this.state &&
+                  this.state.user &&
+                  this.state.user.collections &&
+                  this.state.user.collections.map(collection => (
+                    <button
+                      onClick={() => this.addCollection(collection._id)}
+                      class="droppedbtn"
+                    >
+                      {collection.name}
+                    </button>
+                  ))}
+              </div>
             </div>
+          )}
+          <div className="detail-text">
+            {" "}
+            {<h1>{name}</h1>}
+            {author && <p>author {author}</p>}
+            {year && <p>year {year}</p>}
+            {museum === "RMA" ? (
+              <p>Rijksmuseum of Amsterdam</p>
+            ) : museum === "MOMA" ? (
+              <p>MoMA New York</p>
+            ) : (
+              <p>Metropolitan Museum of Art</p>
+            )}
+            {technic && <p>technic {technic}</p>}
+            {origin && (
+              <p>
+                origin
+                {origin && <p>{origin[0]}</p>}
+              </p>
+            )}
+            {tags && (
+              <p>
+                tags
+                {tags && tags.map(tag => <p>{tag}</p>)}
+              </p>
+            )}
+            {description && <p>description{description}</p>}
+            {culture && <p>culture{culture}</p>}
+            {classification && <p>classification{classification}</p>}
+            {department && <p>department{department}</p>}
           </div>
-          {/* )} */}
         </div>
       </div>
     );

@@ -6,6 +6,7 @@ import D3Test2 from "../../components/D3Test/D3Test2";
 
 class CollectionDetail extends Component {
   state = {
+    collection:{},
     // name: "Identity",
     data: {
       children: [
@@ -26,7 +27,18 @@ class CollectionDetail extends Component {
     }
   };
 
+  componentWillMount(){
+    console.log(this.props.match.params.id)
+    Axios.get(
+      `${process.env.REACT_APP_API_URL}/collection/${this.props.match.params.id}`
+    ).then(collectionFound => {
+      this.setState({ ...this.state, collection: collectionFound.data });
+      console.log("state", this.state);
+    });
+  }
+
   render() {
+    console.log(this.props)
     return (
       <div className="CollectionDetail-style">
         {" "}
