@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Collection.scss";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 class Collection extends Component {
   // constructor(props) {}
@@ -24,14 +25,17 @@ class Collection extends Component {
           <h1>{this.props.collection.name}</h1>
           <button onClick={() => this.deleteCollection()}>delete</button>
         </div>
-        <div className="collectionImages">
-          {this.props.collection.pieces.slice(0, 4).map(piece => (
-            <div
-              className="imageSquare"
-              style={{ backgroundImage: `url(${piece.imageUrl})` }}
-            ></div>
-          ))}
-        </div>
+        <Link to={`/collection/${this.props.collection._id}`}>
+          {" "}
+          <div className="collectionImages">
+            {this.props.collection.pieces.slice(0, 4).map(piece => (
+              <div
+                className="imageSquare"
+                style={{ backgroundImage: `url(${piece.imageUrl})` }}
+              ></div>
+            ))}
+          </div>
+        </Link>
       </div>
     );
   }

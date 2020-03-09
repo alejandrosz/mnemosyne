@@ -3,6 +3,7 @@ import "./Collections.scss";
 import Collection from "./Collection";
 import Axios from "axios";
 
+
 class Collections extends Component {
   // constructor(props) {}
   state = { newCollection: "" };

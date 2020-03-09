@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 import Profile from "./components/profile/Profile";
 import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
+import CollectionDetail from "./components/CollectionDetail/CollectionDetail";
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
 // render(<div ref=”myDiv”></div>)
@@ -78,7 +79,7 @@ class App extends Component {
         .then(results => {
           results = results.data;
           if (results) {
-            const filteredResults = results//this.filterResults(results);
+            const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
             const tree = this.nestByMuseum(filteredResults);
             this.setState({ resultsDetail: filteredResults, tree: tree });
@@ -195,10 +196,10 @@ class App extends Component {
         if (p.origin.length <= 0 && o === "noOrigin") {
           return true;
         }
-        return (
-          p.origin.includes(o) /* &&
-          !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or]) */
-        );
+        return p.origin.includes(
+          o
+        ) /* &&
+          !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or]) */;
       });
       /* console.log('-- currOrigin', o, 'prevOrigins', prevOrigins, 'filtered', [
         ...originPieces.map(p => p.origin)
@@ -276,13 +277,26 @@ class App extends Component {
           <Switch>
             <Route
               path="/detail/:id"
-              render={({ match }) => <DetailPiece user={this.state.loggedInUser} match={ match }/>}
+              render={({ match }) => (
+                <DetailPiece user={this.state.loggedInUser} match={match} />
+              )}
+            />
+            <Route
+              path="/collection/:id"
+              render={({ match }) => (
+                <CollectionDetail
+                  user={this.state.loggedInUser}
+                  match={match}
+                />
+              )}
             />
             {/* <Route  path="/" /> */}
             <Route
               // path="/profile/:id"
               path="/profile"
-              render={(props) => <Profile user={this.state.loggedInUser} {...props}/>}
+              render={props => (
+                <Profile user={this.state.loggedInUser} {...props} />
+              )}
             />
           </Switch>
           <Footer

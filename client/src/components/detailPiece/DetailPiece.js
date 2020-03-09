@@ -109,12 +109,15 @@ class DetailPiece extends Component {
 
     return (
       <div className="detailPiece">
-        <div>
+        <div className="detail-card">
           {" "}
-          <h1>hola soy el detalle</h1>
-          <Link to="/">
-            <h1>X</h1>
-          </Link>
+          <div className="detail-top">
+            {" "}
+            <h1>Detail view</h1>
+            <Link to="/">
+              <h1>X</h1>
+            </Link>
+          </div>
           <img src={this.state.piece.imageUrl} alt="image" />
           <h1>&hearts;{this.state.piece.rating}</h1>
           <p>{this.state.piece.name}</p>
@@ -123,7 +126,7 @@ class DetailPiece extends Component {
           </p>
           <p>{this.state.piece.museum}</p>
           <button onClick={this.addLike}>like</button>
-          {this.state.isSaved? <h1> saved</h1> : <h1>not saved</h1>}
+          {this.state.isSaved ? <h1> saved</h1> : <h1>not saved</h1>}
           {/* {this.state &&
           this.state.user &&
           this.state.user.collections &&

@@ -118,8 +118,9 @@ class D3Test2 extends Component {
         return d.depth >= 5;
       })
       .append("button")
+      .attr("class", "button-detail")
       .on("click", this.goDetail)
-      .style("border", "50px solid #0000FF");
+      .style("border", "50px solid #FFFFFF");
 
     // .append("a")
 
