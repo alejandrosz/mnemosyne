@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./DetailPiece.scss";
-import { Link, useRouteMatch } from "react-router-dom";
-
+import { Link, useRouteMatch, withRouter } from "react-router-dom";
 import Axios from "axios";
 
 // import { useRouteMatch } from "react-router-dom";
@@ -32,7 +31,15 @@ class DetailPiece extends Component {
   }
 
   setUserProfile(userData) {
-    this.setState({ ...this.state, user: userData });
+    let isSaved =
+      userData.collections &&
+      userData.collections.some(collection =>
+        collection.pieces.find(
+          piece => piece._id === this.props.match.params.id
+        )
+      );
+
+    this.setState({ ...this.state, user: userData, isSaved });
     console.log(
       "collections from back",
       userData && userData.collections && userData.collections.length
@@ -89,7 +96,7 @@ class DetailPiece extends Component {
       `${process.env.REACT_APP_API_URL}/collection/add/${collectionId}&${this.state.piece._id}`
     ).then(pieceAdded => {
       console.log("pieceAdded", pieceAdded.data);
-      this.setState({ isSaved: !this.state.isSaved });
+      this.getProfile(this.state.user);
     });
   }
 
@@ -99,7 +106,7 @@ class DetailPiece extends Component {
       `${process.env.REACT_APP_API_URL}/collection/del/${collectionId}&${this.state.piece._id}`
     ).then(pieceDeleted => {
       console.log("pieceDeleted", pieceDeleted.data);
-      this.setState({ isSaved: !this.state.isSaved });
+      this.getProfile(this.state.user);
     });
   }
 
@@ -130,9 +137,7 @@ class DetailPiece extends Component {
           <div className="detail-top">
             {" "}
             <h1>Detail view</h1>
-            <Link to="/">
-              <h1>X</h1>
-            </Link>
+            <button onClick={this.props.history.goBack}>Close</button>
           </div>
           <img src={imageUrl} alt="image" />
           <h1>&hearts;{rating}</h1>{" "}
@@ -143,38 +148,19 @@ class DetailPiece extends Component {
           this.state.user.collections &&
           this.state.user.collections.some(collection =>
             collection.pieces.find(this.state.piece._id) */}
-          {this.state &&
-          this.state.user &&
-          this.state.user.collections &&
-          this.state.user.collections.some(collection =>
-            collection.pieces
-              .map(piece => piece._id)
-              .find(id => id === this.state.piece._id)
-          ) ? (
-            <div class="dropdown">
-              <button class="dropbtn">Delete</button>
-              <div class="dropdown-content">
-                {this.state &&
-                  this.state.user &&
-                  this.state.user.collections &&
-                  this.state.user.collections.map(collection => (
-                    <button
-                      onClick={() => this.deleteCollection(collection._id)}
-                      class="droppedbtn"
-                    >
-                      {collection.name}
-                    </button>
-                  ))}
-              </div>
-            </div>
-          ) : (
-            <div class="dropdown">
-              <button class="dropbtn">Add</button>
-              <div class="dropdown-content">
-                {this.state &&
-                  this.state.user &&
-                  this.state.user.collections &&
-                  this.state.user.collections.map(collection => (
+          <div class="dropdown">
+            <button class="dropbtn">Add</button>
+            <div class="dropdown-content">
+              {this.state &&
+                this.state.user &&
+                this.state.user.collections &&
+                this.state.user.collections
+                  .filter(collection =>
+                    collection.pieces.every(
+                      p => p._id !== this.props.match.params.id
+                    )
+                  )
+                  .map(collection => (
                     <button
                       onClick={() => this.addCollection(collection._id)}
                       class="droppedbtn"
@@ -182,6 +168,29 @@ class DetailPiece extends Component {
                       {collection.name}
                     </button>
                   ))}
+            </div>
+          </div>
+          {this.state.isSaved && (
+            <div class="dropdown">
+              <button class="dropbtn">Delete</button>
+              <div class="dropdown-content">
+                {this.state &&
+                  this.state.user &&
+                  this.state.user.collections &&
+                  this.state.user.collections
+                    .filter(collection =>
+                      collection.pieces.some(
+                        p => p._id === this.props.match.params.id
+                      )
+                    )
+                    .map(collection => (
+                      <button
+                        onClick={() => this.deleteCollection(collection._id)}
+                        class="droppedbtn"
+                      >
+                        {collection.name}
+                      </button>
+                    ))}
               </div>
             </div>
           )}
@@ -221,7 +230,7 @@ class DetailPiece extends Component {
   }
 }
 
-export default DetailPiece;
+export default withRouter (DetailPiece);
 
 // Axios.get(`${process.env.REACT_APP_API_URL}/profile/${useUser._id}`).then(
 //   gotUser => {

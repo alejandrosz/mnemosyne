@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Profile.scss";
 import Axios from "axios";
 import Collections from "../collection/Collections";
@@ -55,9 +55,8 @@ class Profile extends Component {
             <div className="Profile-name">
               {" "}
               <h1>perfil de {this.props.user.username}</h1>
-              <Link to="/">
-                <h1>X</h1>
-              </Link>
+              <button onClick={this.props.history.goBack}>Close</button>
+
             </div>
             <div>
               {profile && profile.collections && (
@@ -88,4 +87,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);

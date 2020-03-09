@@ -1,0 +1,134 @@
+$m: 0; // margin
+.button-detail{
+  bottom:0;
+width: 100%;
+border: 5px solid black
+
+
+}
+
+
+.father-small {
+  height: 70vh;
+  width: 80vw;
+  display: flex;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html,
+
+.nav-bar-d3-small {
+  position: fixed;
+  // width: 80vw;
+  top: 0;
+  // top: calc(100vh - 100px - 3vh);
+  // padding-top: 2vw;
+  z-index: 1050;
+  
+  .up-small {
+    
+    font: bold 14px/1 sans-serif;
+    color: white;
+    height: 3vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    background-color: rgba(228, 228, 228, 0.8);
+    float: left;
+    // background-image:
+    // linear-gradient(to bottom, rgba(92,47,90,1), rgba(92,47,90,0));
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(173, 173, 173, 0.8);
+    }
+  }
+}
+.feature-small {
+  position: relative;
+  width: calc(100% - #{$m} * 2 * 1px);
+  height: calc(100% - #{$m} * 2 * 1px);
+  margin: $m * 1px;
+  //background: #aaa;
+  overflow: hidden;
+}
+.node-small {
+  border: 2px solid black;
+  position: absolute;
+  background: transparent url("") no-repeat 50% / cover;
+  //border: 1px white solid;
+  overflow: hidden;
+  opacity: 0.8;
+  transform: translate(calc(20vw/2), (30vh/2));
+  z-index: 850;
+  transition: opacity 0.8s;
+  cursor: pointer;
+  .label {
+    display: inline;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: hsla(0, 0, 100, 0.6);
+    //white-space: nowrap;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: 10%;
+    left: 10%;
+    transform: translateX(-50%) translateY(-50%);
+    transition: color 0.4s, opacity 0.8s, filter 0.8s;
+  }
+  &.hide {
+    // zoom in
+    opacity: 0;
+    pointer-events: none;
+
+    .label {
+      filter: blur(10px);
+    }
+  }
+  &:hover {
+    //background-color: #222 !important;
+    //opacity: 1;
+    .label {
+      color: hsla(0, 0, 100, 1);
+    }
+  }
+
+  &.level-small-0 {
+    transform: translate(calc(20vw/2), (30vh/2));
+
+    z-index: 904;
+    
+    font-size: 15vmin;
+    display: none;
+  }
+  &.level-small-1 {
+    transform: translate(calc(20vw/2), (30vh/2));
+
+    z-index: 903;
+    font-size: 10vmin;
+  }
+  &.level-small-2 {
+    transform: translate(calc(20vw/2), (30vh/2));
+
+    z-index: 902;
+    font-size: 5vmin;
+  }
+  &.level-small-3 {
+    transform: translate(calc(20vw/2), (30vh/2));
+
+    z-index: 901;
+    font-size: 2.5vmin;
+  }
+  &.level-small-4 {
+    transform: translate(calc(20vw/2), (30vh/2));
+
+    z-index: 900;
+    font-size: 2.5vmin;
+  }
+
+}
