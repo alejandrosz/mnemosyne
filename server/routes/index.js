@@ -30,7 +30,7 @@ router.get("/pieces/:filter", (req, res, next) => {
     ]
   })
     .sort({ rating: 1 })
-    .limit(100)
+    .limit(50)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error on search", err.message);
@@ -118,7 +118,7 @@ router.put("/collection/del/:collectionId&:pieceId", (req, res, next) => {
     });
 });
 
-router.put("/piece/:id", (req, res, next) => {
+router.put("/piece/like/:id", (req, res, next) => {
   let pieceId = req.params.id;
   Pieces.findByIdAndUpdate(
     { _id: pieceId },

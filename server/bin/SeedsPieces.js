@@ -229,7 +229,7 @@ const metIds = (startFrom, to) => {
       clearInterval(intervalID);
     }
   }
-  var intervalID = setInterval(increaseTime, 200);
+  var intervalID = setInterval(increaseTime, 150);
 };
 
 const rmaIds = (startFrom, to) => {
@@ -246,7 +246,7 @@ const rmaIds = (startFrom, to) => {
           clearInterval(intervalID);
         }
       }
-      var intervalID = setInterval(increaseTime, 500);
+      var intervalID = setInterval(increaseTime, 350);
     });
 };
 
@@ -255,8 +255,8 @@ const momaIds = (startFrom, to) => {
     getPieceMOMA(i);
   }
 };
-const start = 50000;
-const finish = 120000;
-metIds(start + 1, finish);
-// rmaIds(start, finish);
+const start = 250000;
+const finish = 300000;
+// metIds(start + 1, finish);
+rmaIds(start, finish);
 // momaIds(start, finish);

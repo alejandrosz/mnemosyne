@@ -78,7 +78,7 @@ class App extends Component {
         .then(results => {
           results = results.data;
           if (results) {
-            const filteredResults = this.filterResults(results);
+            const filteredResults = results//this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
             const tree = this.nestByMuseum(filteredResults);
             this.setState({ resultsDetail: filteredResults, tree: tree });
@@ -99,8 +99,7 @@ class App extends Component {
     const ratedPieces = pieces.sort((a, b) => b.rating - a.rating);
     return ratedPieces;
   }
-  nestByMuseum(piecesArr) {
-    const pieces = piecesArr;
+  nestByMuseum(pieces) {
     const tree = { name: "search", value: "", children: [] };
     const museums = ["MET", "MOMA", "RMA"];
     museums.forEach(m => {
@@ -125,7 +124,6 @@ class App extends Component {
 
   nestByDate(museumPieces) {
     const mainDates = this.getDatesFromPieces(museumPieces);
-    this.getDatesFromPieces(museumPieces);
     // console.log('mainDates', mainDates);
     const nestedMuseum = [];
     mainDates.forEach((d, i) => {

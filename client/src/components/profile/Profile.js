@@ -80,6 +80,7 @@ class Profile extends Component {
               <h1>X</h1>
             </Link>
           </div>
+          
           <div className="Profile-body"></div>
         </div>
       );
