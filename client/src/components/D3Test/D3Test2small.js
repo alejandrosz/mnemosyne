@@ -17,7 +17,7 @@ class D3Test2 extends Component {
     this.goDetail = this.goDetail.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    var chart = d3.select("#chart");
+    var chart = d3.select("#chart-small");
     chart.selectAll("*").remove();
   }
 
@@ -66,7 +66,7 @@ class D3Test2 extends Component {
     treemap(nodes)
     ;
 
-    var chart = d3.select("#chart");
+    var chart = d3.select("#chart-small");
     var cells = chart
     .selectAll(".node")
     .data(nodes.descendants())

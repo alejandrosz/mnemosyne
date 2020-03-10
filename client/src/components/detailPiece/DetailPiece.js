@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./DetailPiece.scss";
 import { Link, useRouteMatch, withRouter } from "react-router-dom";
 import Axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 class DetailPiece extends Component {
   constructor(props) {
     super(props);
@@ -121,7 +122,10 @@ class DetailPiece extends Component {
             <img className={this.state.imageClass} src={imageUrl} />
           </div>
           <div className="detail-buttons">
-            <h1>&hearts;{rating}</h1>
+            <h1>
+              <FontAwesomeIcon icon={faHeart} />
+              {rating}
+            </h1>
             {/* {this.state.isSaved ? <h1> saved</h1> : <h1>not saved</h1>} */}
             <button onClick={this.addLike}>like</button>
             <div class="dropdown">

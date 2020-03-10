@@ -74,10 +74,14 @@
   }
 
   button {
+    transition: 0.3s ease;
+
     &:hover {
       background-color: white;
       color: black;
       border-radius: 0px;
+      margin-left: 10px;
+
       border: 1px solid white;
     }
     color: white;
@@ -98,6 +102,15 @@
   z-index: 50;
   /* Dropdown Button */
   .dropbtn {
+    transition: 0.3s ease;
+
+    &:hover {
+      background-color: white;
+      color: black;
+      border-radius: 0px;
+      border: 1px solid white;
+      margin-left: 10px;
+    }
   }
 
   .droppedbtn {
