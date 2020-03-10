@@ -39,15 +39,16 @@ class D3Test2 extends Component {
         .scaleLinear()
         .domain([0, height])
         .range([0, height]),
-      color = d3.scaleOrdinal().range(
-        // d3.schemeGreys.map(function(c) {
-        d3.schemeSet1.map(function(c) {
-          // d3.schemeSet1.map(function(c) {
-          c = d3.rgb(c);
-          //c.opacity = 0.5;
-          return c;
-        })
-      )
+      color =  d3.rgb
+      // d3.scaleOrdinal().range(
+      //   // d3.schemeGreys.map(function(c) {
+      //   d3.schemeSet1.map(function(c) {
+      //     // d3.schemeSet1.map(function(c) {
+      //     c = d3.rgb(c);
+      //     //c.opacity = 0.5;
+      //     return c;
+      //   })
+      // )
       ,
       treemap = d3
         .treemap()

@@ -3,7 +3,6 @@ import "./Collections.scss";
 import Collection from "./Collection";
 import Axios from "axios";
 
-
 class Collections extends Component {
   // constructor(props) {}
   state = { newCollection: "" };
@@ -27,7 +26,7 @@ class Collections extends Component {
       {
         name: this.state.newCollection
       }
-    ).then((updatedUser) => this.props.reFetch(updatedUser.data));
+    ).then(updatedUser => this.props.reFetch(updatedUser.data));
   }
 
   render() {
@@ -36,6 +35,7 @@ class Collections extends Component {
       <div className="collections-style">
         <div className="add-field">
           <input
+            autoComplete="off"
             type="text"
             placeholder="create new collection"
             id="create-collection"

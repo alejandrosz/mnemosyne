@@ -51,6 +51,7 @@ class Signup extends Component {
         <form className="signupForm" onSubmit={this.handleFormSubmit}>
           {/* <label>name</label> */}
           <input
+            autoComplete="off"
             type="text"
             name="username"
             value={this.state.username}
@@ -60,6 +61,7 @@ class Signup extends Component {
 
           {/* <label>pass</label> */}
           <input
+            autoComplete="off"
             type="password"
             name="password"
             value={this.state.password}

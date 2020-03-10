@@ -63,12 +63,6 @@ Piece.find({ name: new RegExp("forest", "gi") })
         pieces: [
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`
         ]
       },
@@ -76,6 +70,7 @@ Piece.find({ name: new RegExp("forest", "gi") })
         _id: collectionsId[1],
         name: "Colección2",
         pieces: [
+          `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
@@ -109,17 +104,11 @@ Piece.find({ name: new RegExp("forest", "gi") })
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`,
-          `${piecesId[Math.floor(Math.random() * 30)]}`
         ]
       },
       {
         _id: collectionsId[4],
-        name: "Colección6",
+        name: "Colección5",
         pieces: [
           `${piecesId[Math.floor(Math.random() * 30)]}`,
           `${piecesId[Math.floor(Math.random() * 30)]}`,
@@ -177,7 +166,6 @@ Piece.find({ name: new RegExp("forest", "gi") })
         throw err;
       });
   });
-
 
 // Item.deleteMany()
 //   .then(() => {

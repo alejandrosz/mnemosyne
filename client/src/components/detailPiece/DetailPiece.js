@@ -3,23 +3,14 @@ import "./DetailPiece.scss";
 import { Link, useRouteMatch, withRouter } from "react-router-dom";
 import Axios from "axios";
 
-// import { useRouteMatch } from "react-router-dom";
-
-// function BlogPost() {
-
-//   // Do whatever you want with the match...
-//   return <div />;
-// }
-
 class DetailPiece extends Component {
   constructor(props) {
     super(props);
-    this.state = { piece: {}, user: {}, isSaved: false };
+    this.state = { piece: {}, user: {}, isSaved: false, imageClass: "" };
     this.addLike = this.addLike.bind(this);
   }
 
   getProfile(user) {
-    console.log("callingrefetchprofile", user, this.props.user);
     let useUser = user || this.props.user;
     if (useUser) {
       Axios.get(`${process.env.REACT_APP_API_URL}/profile/${useUser._id}`).then(
@@ -40,10 +31,6 @@ class DetailPiece extends Component {
       );
 
     this.setState({ ...this.state, user: userData, isSaved });
-    console.log(
-      "collections from back",
-      userData && userData.collections && userData.collections.length
-    );
   }
 
   componentWillReceiveProps(next) {
@@ -55,43 +42,40 @@ class DetailPiece extends Component {
     Axios.get(
       `${process.env.REACT_APP_API_URL}/piece/${this.props.match.params.id}`
     ).then(pieceFound => {
-      this.setState({ ...this.state, piece: pieceFound.data });
+      let aspectRatio = "";
+      var img = new Image();
+      img.src = pieceFound.data.imageUrl;
+      img.onload = () => {
+        let height = img.height;
+        let width = img.width;
+        let relation = height / width;
+        if (relation > 0.9 && relation < 1.1) {
+          aspectRatio = "square-img";
+        } else if (relation >= 1.1) {
+          aspectRatio = "vertical-img";
+        } else if (relation <= 0.9) {
+          aspectRatio = "horizontal-img";
+        }
+
+        this.setState({
+          ...this.state,
+          piece: pieceFound.data,
+          imageClass: aspectRatio
+        });
+      };
+
       console.log("state", this.state);
     });
   }
 
-  // componentDidMount() {
-  //   console.log("props", this.props.match.params.id);
-  //   Axios.get(
-  //     `${process.env.REACT_APP_API_URL}/piece/${this.props.match.params.id}`
-  //   ).then(pieceFound => {
-  //     this.setState({ ...this.state, piece: pieceFound.data });
-  //     console.log("state", this.state);
-  //   });
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("nextprops", nextProps);
-  //   Axios.get(
-  //     `${process.env.REACT_APP_API_URL}/profile/${nextProps.user._id}`
-  //   ).then(userFound => {
-  //     this.setState({ ...this.state, user: userFound.data });
-  //     console.log("state", this.state);
-  //   });
-  // }
-
   addLike() {
-    console.log("like", this.state);
     Axios.put(
       `${process.env.REACT_APP_API_URL}/piece/like/${this.state.piece._id}`
     ).then(pieceLiked => {
-      console.log("pieceLiked", pieceLiked.data);
       this.setState({ piece: pieceLiked.data });
     });
   }
-  // /collection/add/:collectionId&:pieceId
   addCollection(collectionId) {
-    console.log("collectionId", collectionId, "pieceid", this.state.piece._id);
     Axios.put(
       `${process.env.REACT_APP_API_URL}/collection/add/${collectionId}&${this.state.piece._id}`
     ).then(pieceAdded => {
@@ -101,7 +85,6 @@ class DetailPiece extends Component {
   }
 
   deleteCollection(collectionId) {
-    console.log("collectionId", collectionId, "pieceid", this.state.piece._id);
     Axios.put(
       `${process.env.REACT_APP_API_URL}/collection/del/${collectionId}&${this.state.piece._id}`
     ).then(pieceDeleted => {
@@ -111,8 +94,6 @@ class DetailPiece extends Component {
   }
 
   render() {
-    console.log("props user", this.props.user);
-    console.log("image", this.state.piece.imageUrl);
     let {
       origin,
       technic,
@@ -128,64 +109,36 @@ class DetailPiece extends Component {
       rating,
       department
     } = this.state.piece;
-    console.log("piece id", this.state.piece._id);
 
     return (
       <div className="detailPiece">
         <div className="detail-card">
-          {" "}
           <div className="detail-top">
-            {" "}
             <h1>Detail view</h1>
             <button onClick={this.props.history.goBack}>Close</button>
           </div>
-          <img src={imageUrl} alt="image" />
-          <h1>&hearts;{rating}</h1>{" "}
-          {this.state.isSaved ? <h1> saved</h1> : <h1>not saved</h1>}
-          <button onClick={this.addLike}>like</button>
-          {/* {this.state &&
-          this.state.user &&
-          this.state.user.collections &&
-          this.state.user.collections.some(collection =>
-            collection.pieces.find(this.state.piece._id) */}
-          <div class="dropdown">
-            <button class="dropbtn">Add</button>
-            <div class="dropdown-content">
-              {this.state &&
-                this.state.user &&
-                this.state.user.collections &&
-                this.state.user.collections
-                  .filter(collection =>
-                    collection.pieces.every(
-                      p => p._id !== this.props.match.params.id
-                    )
-                  )
-                  .map(collection => (
-                    <button
-                      onClick={() => this.addCollection(collection._id)}
-                      class="droppedbtn"
-                    >
-                      {collection.name}
-                    </button>
-                  ))}
-            </div>
+          <div className="image-container">
+            <img className={this.state.imageClass} src={imageUrl} />
           </div>
-          {this.state.isSaved && (
+          <div className="detail-buttons">
+            <h1>&hearts;{rating}</h1>
+            {/* {this.state.isSaved ? <h1> saved</h1> : <h1>not saved</h1>} */}
+            <button onClick={this.addLike}>like</button>
             <div class="dropdown">
-              <button class="dropbtn">Delete</button>
+              <button class="dropbtn">Add</button>
               <div class="dropdown-content">
                 {this.state &&
                   this.state.user &&
                   this.state.user.collections &&
                   this.state.user.collections
                     .filter(collection =>
-                      collection.pieces.some(
-                        p => p._id === this.props.match.params.id
+                      collection.pieces.every(
+                        p => p._id !== this.props.match.params.id
                       )
                     )
                     .map(collection => (
                       <button
-                        onClick={() => this.deleteCollection(collection._id)}
+                        onClick={() => this.addCollection(collection._id)}
                         class="droppedbtn"
                       >
                         {collection.name}
@@ -193,7 +146,31 @@ class DetailPiece extends Component {
                     ))}
               </div>
             </div>
-          )}
+            {this.state.isSaved && (
+              <div class="dropdown">
+                <button class="dropbtn">Delete</button>
+                <div class="dropdown-content">
+                  {this.state &&
+                    this.state.user &&
+                    this.state.user.collections &&
+                    this.state.user.collections
+                      .filter(collection =>
+                        collection.pieces.some(
+                          p => p._id === this.props.match.params.id
+                        )
+                      )
+                      .map(collection => (
+                        <button
+                          onClick={() => this.deleteCollection(collection._id)}
+                          class="droppedbtn"
+                        >
+                          {collection.name}
+                        </button>
+                      ))}
+                </div>
+              </div>
+            )}
+          </div>
           <div className="detail-text">
             {" "}
             {<h1>{name}</h1>}
@@ -230,10 +207,4 @@ class DetailPiece extends Component {
   }
 }
 
-export default withRouter (DetailPiece);
-
-// Axios.get(`${process.env.REACT_APP_API_URL}/profile/${useUser._id}`).then(
-//   gotUser => {
-//     this.setUserProfile(gotUser.data);
-//   }
-// );
+export default withRouter(DetailPiece);

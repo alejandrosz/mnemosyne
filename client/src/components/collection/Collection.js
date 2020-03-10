@@ -23,7 +23,7 @@ class Collection extends Component {
       <div className="collectionCard">
         <div className="collectionButtons">
           <h1>{this.props.collection.name}</h1>
-          <button onClick={() => this.deleteCollection()}>delete</button>
+          <button className="button-moved-right" onClick={() => this.deleteCollection()}>delete</button>
         </div>
         <Link to={`/collection/${this.props.collection._id}`}>
           {" "}

@@ -13,6 +13,8 @@ import Profile from "./components/profile/Profile";
 import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
 import CollectionDetail from "./components/CollectionDetail/CollectionDetail";
+var Loader = require('react-loader');
+
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
 // render(<div ref=”myDiv”></div>)
@@ -25,7 +27,8 @@ class App extends Component {
       search: "",
       resultsId: [],
       resultsDetail: [],
-      tree: {}
+      tree: {},
+      loaded: false
     };
     this.service = new AuthService();
     this.fetchUser();
@@ -83,7 +86,7 @@ class App extends Component {
             const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
             const tree = nestByMuseum(filteredResults);
-            this.setState({ resultsDetail: filteredResults, tree: tree });
+            this.setState({ resultsDetail: filteredResults, tree: tree, loaded: true });
           }
         });
     }
@@ -104,8 +107,9 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="App">
+          {/* <Loader loaded={this.state.loaded}> */}
           <D3Test2 data={this.state.tree}></D3Test2>
-
+          {/* </Loader> */}
           <Navbar
             // searchBar={e => this.searchBar(e)}
             userInSession={this.state.loggedInUser}

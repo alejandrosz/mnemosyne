@@ -48,6 +48,7 @@ class Login extends Component {
         <form className="loginForm" onSubmit={this.handleFormSubmit}>
           {/* <label>name</label> */}
           <input
+            autoComplete="off"
             type="text"
             name="username"
             value={this.state.username}
@@ -57,6 +58,7 @@ class Login extends Component {
 
           {/* <label>pass</label> */}
           <input
+            autoComplete="off"
             type="password"
             name="password"
             value={this.state.password}

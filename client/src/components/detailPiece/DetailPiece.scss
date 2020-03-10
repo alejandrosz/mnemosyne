@@ -1,5 +1,13 @@
 .detailPiece {
-  h1{
+  .detail-buttons {
+    button {
+      margin-left: 5px;
+    }
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+  }
+  h1 {
     font-weight: bold;
   }
   /* width */
@@ -13,7 +21,7 @@
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background:rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.9);
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
@@ -24,8 +32,8 @@
   }
 
   .detail-text {
-    width: 30vw;
-    height: 30vh;
+    width: 55vw;
+    height: 20vh;
     overflow-y: auto;
   }
   @keyframes appear {
@@ -43,17 +51,38 @@
     }
   }
   .detail-top {
-    margin-top: 3vh;
+    margin-top: 6vh;
     display: flex;
     justify-content: space-between;
   }
   img {
-    height: 50vh;
+    margin: 15px 0;
+
+    object-fit: contain;
   }
+  .square-img {
+    height: 55vh;
+    width: 55vw;
+  }
+  .vertical-img {
+    height: 55vh;
+    width: 55vw;
+  }
+  .horizontal-img {
+    height: 55vh;
+    width: 55vw;
+  }
+
   button {
+    &:hover {
+      background-color: white;
+      color: black;
+      border-radius: 0px;
+      border: 1px solid white;
+    }
     color: white;
     background-color: transparent;
-    width: 50px;
+    width: 55px;
   }
   display: flex;
   flex-direction: column;
@@ -69,6 +98,11 @@
   z-index: 50;
   /* Dropdown Button */
   .dropbtn {
+  }
+
+  .droppedbtn {
+    background: black;
+    width: auto;
   }
 
   /* The container <div> - needed to position the dropdown content */

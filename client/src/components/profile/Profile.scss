@@ -1,4 +1,25 @@
 .Profile-style {
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  button {
+    transition: 0.3s ease;
+    &:hover {
+      background-color: white;
+      color: black;
+      border-radius: 0px;
+      border: 1px solid white;
+      margin-right: 10px;
+    }
+    color: white;
+    background-color: transparent;
+    width: 50px;
+  }
+  h1 {
+    font-weight: bold;
+  }
   @keyframes appear {
     0% {
       // backdrop-filter: 0;
@@ -27,12 +48,20 @@
 }
 
 .Profile-top {
+  input {
+    display: flex;
+    background-color: transparent;
+    border: 1px solid white;
+  }
+  width: 55vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 50px;
-  .Profile-name{
+  margin-top: 6vh;
+
+  .Profile-name {
+    width: 100%;
     display: flex;
-    
+    justify-content: space-between;
   }
 }

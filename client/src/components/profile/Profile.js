@@ -54,7 +54,7 @@ class Profile extends Component {
           <div className="Profile-top">
             <div className="Profile-name">
               {" "}
-              <h1>perfil de {this.props.user.username}</h1>
+              <h1>Profile of {this.props.user.username}</h1>
               <button onClick={this.props.history.goBack}>Close</button>
 
             </div>
@@ -74,7 +74,7 @@ class Profile extends Component {
       return (
         <div className="Profile-style">
           <div className="Profile-top">
-            <h1>perfil de </h1>
+            <h1>Profile of </h1>
             <Link to="/">
               <h1>X</h1>
             </Link>

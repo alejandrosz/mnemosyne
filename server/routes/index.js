@@ -30,7 +30,7 @@ router.get("/pieces/:filter", (req, res, next) => {
     ]
   })
     .sort({ rating: 1 })
-    .limit(20)
+    .limit(30)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error on search", err.message);

@@ -54,7 +54,7 @@ class CollectionDetail extends Component {
         <div className="CollectionDetail-top">
           {" "}
           <div className="CollectionDetail-buttons">
-            <h1>Detalle de coleccion</h1>
+            <h1>{this.state.collection.name}</h1>
             <button onClick={this.props.history.goBack}>Close</button>
 
           </div>
