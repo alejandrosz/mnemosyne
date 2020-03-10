@@ -1,13 +1,16 @@
 .footer-style {
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: rgba($color: #ffffff, $alpha: 0.2);
   height: 100px;
   width: 100%;
   position: fixed;
   bottom: 0;
+  padding: 30px;
   .search-bar {
+    // margin-left: 20px;
     border: 2px solid white;
     padding: 3px;
     background-color: transparent;

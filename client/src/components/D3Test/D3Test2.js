@@ -3,6 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import * as d3 from "d3";
 import "./D3Test2.scss";
 import { withRouter } from "react-router-dom";
+import $ from "jquery";
+import "./BackgroundLoader.js";
 
 // import data from "./Dataset1";
 // import data2 from "./Dataset2";
@@ -200,6 +202,8 @@ class D3Test2 extends Component {
         })
         .classed("hide", false);
     }
+let loadedCount =0
+    // $('node').bgLoaded({afterLoaded: ()=>this.props.setLoaded})
 
     return (
       <div className="father">

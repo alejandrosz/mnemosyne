@@ -9,40 +9,24 @@ class CollectionDetail extends Component {
   state = {
     collection: {},
     treeData: {},
-    // name: "Identity",
     data: {
       children: [
         { name: "Photo 1", value: "cgi-1.jpg" },
         { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 5", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 1", value: "cgi-1.jpg" },
-        { name: "Photo 5", value: "cgi-2.jpg" }
       ]
     }
   };
 
   componentWillMount() {
-    console.log(this.props.match.params.id);
     Axios.get(
       `${process.env.REACT_APP_API_URL}/collection/${this.props.match.params.id}`
     ).then(collectionFound => {
-      console.log(collectionFound.data)
       const treeCollection = nestByMuseum(collectionFound.data.pieces);
-      console.log(treeCollection)
       this.setState({
         ...this.state,
         collection: collectionFound.data,
         treeData: treeCollection
       });
-      console.log("state", this.state);
     });
   }
 
@@ -50,13 +34,10 @@ class CollectionDetail extends Component {
     console.log(this.props);
     return (
       <div className="CollectionDetail-style">
-        {" "}
         <div className="CollectionDetail-top">
-          {" "}
           <div className="CollectionDetail-buttons">
             <h1>{this.state.collection.name}</h1>
             <button onClick={this.props.history.goBack}>Close</button>
-
           </div>
           <div>
             <D3Test2small data={this.state.treeData}></D3Test2small>

@@ -51,7 +51,7 @@ let users = [
 ];
 
 Piece.find({ name: new RegExp("forest", "gi") })
-  .limit(31)
+  .limit(50)
   .then(pieces => {
     piecesId = pieces.map(piece => piece._id);
     console.log(piecesId);

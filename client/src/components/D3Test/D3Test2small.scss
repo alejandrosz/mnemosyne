@@ -61,7 +61,7 @@ html,
   //border: 1px white solid;
   overflow: hidden;
   opacity: 0.8;
-  transform: translate(calc(20vw/2), (30vh/2));
+  transform: translate(calc(20vw/2), (22vh/2));
   z-index: 850;
   transition: opacity 0.8s;
   cursor: pointer;
@@ -98,7 +98,7 @@ html,
   }
 
   &.level-small-0 {
-    transform: translate(calc(20vw/2), (30vh/2));
+    // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 904;
     
@@ -106,25 +106,25 @@ html,
     display: none;
   }
   &.level-small-1 {
-    transform: translate(calc(20vw/2), (30vh/2));
+    // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 903;
     font-size: 10vmin;
   }
   &.level-small-2 {
-    transform: translate(calc(20vw/2), (30vh/2));
+    // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 902;
     font-size: 5vmin;
   }
   &.level-small-3 {
-    transform: translate(calc(20vw/2), (30vh/2));
+    // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 901;
     font-size: 2.5vmin;
   }
   &.level-small-4 {
-    transform: translate(calc(20vw/2), (30vh/2));
+    // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 900;
     font-size: 2.5vmin;

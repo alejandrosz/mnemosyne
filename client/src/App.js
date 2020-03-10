@@ -6,15 +6,14 @@ import Navbar from "./components/navbar/Navbar";
 import AuthService from "./components/auth/AuthService";
 import axios from "axios";
 import Footer from "./components/footer/Footer";
-import {nestByMuseum} from "./nestData"
+import { nestByMuseum } from "./nestData";
 // import * as d3 from "d3";
 // import "../treeStyles.css"
 import Profile from "./components/profile/Profile";
 import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
 import CollectionDetail from "./components/CollectionDetail/CollectionDetail";
-var Loader = require('react-loader');
-
+var Loader = require("react-loader");
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
 // render(<div ref=”myDiv”></div>)
@@ -32,6 +31,7 @@ class App extends Component {
     };
     this.service = new AuthService();
     this.fetchUser();
+    // this.nodeLength = 0
   }
 
   getUser = userObj => {
@@ -75,6 +75,10 @@ class App extends Component {
   //       });
   //   }
   // }
+  setLoaded() {
+    console.log("isloaded", this.state.loaded);
+    this.setState({ loaded: true });
+  }
 
   searchMongo(e) {
     if (e.key === "Enter") {
@@ -85,14 +89,16 @@ class App extends Component {
           if (results) {
             const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
-            const tree = nestByMuseum(filteredResults);
-            this.setState({ resultsDetail: filteredResults, tree: tree, loaded: true });
+            const tree = nestByMuseum(filteredResults, this.nodeLength);
+            this.setState({
+              resultsDetail: filteredResults,
+              tree: tree,
+            });
           }
         });
     }
   }
   // /////////////////////////////
-  
 
   // getData(results) {
   //   let data = results.map(result => ({
@@ -104,12 +110,13 @@ class App extends Component {
   // }
 
   render() {
+    console.log("app render", this.state.loaded);
     return (
       <React.Fragment>
         <div className="App">
-          {/* <Loader loaded={this.state.loaded}> */}
-          <D3Test2 data={this.state.tree}></D3Test2>
-          {/* </Loader> */}
+          <Loader loaded={this.state.loaded}></Loader>
+
+          <D3Test2 setLoaded={this.setLoaded} data={this.state.tree}></D3Test2>
           <Navbar
             // searchBar={e => this.searchBar(e)}
             userInSession={this.state.loggedInUser}

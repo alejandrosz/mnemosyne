@@ -27,9 +27,10 @@ export function nestByMuseum(pieces) {
       size: museumPieces.length
     };
     tree.children.push(childMuseum);
+    // nodeLentgh +=1
     // setState({ tree });
   });
-  console.log("tree", tree);
+  // console.log("tree", tree);
   return tree;
 }
 
@@ -82,7 +83,7 @@ export function getDatesFromPieces(museumPieces) {
   if (piecesWithNoDate.length) {
     years.push("noDate");
   }
-  console.log("years", years);
+  // console.log("years", years);
   return years;
 }
 export function nestByOrigin(datePieces) {
@@ -99,7 +100,7 @@ export function nestByOrigin(datePieces) {
     }
   });
   // console.log('--- origins', origins);
-  console.log("nestByOrigin All", datePieces.length);
+  // console.log("nestByOrigin All", datePieces.length);
   origins.forEach((o, i) => {
     const prevOrigins = i > 0 ? origins.slice(0, i) : [];
     const originPieces = datePieces.filter(p => {
@@ -118,7 +119,7 @@ export function nestByOrigin(datePieces) {
     const nestedOrigins = originPieces.length
       ? nestByAuthor(originPieces)
       : [];
-    console.log("nestByOrigin", nestedOrigins.length, o);
+    // console.log("nestByOrigin", nestedOrigins.length, o);
     const childDate = {
       name: o,
       value: bestImg,

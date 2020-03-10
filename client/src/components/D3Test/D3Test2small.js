@@ -24,7 +24,6 @@ class D3Test2 extends Component {
   goDetail(d) {
     let url = `/detail/${d.data._id}`;
     return this.props.history.push(url);
-    // return <Route render={() => <Redirect to={url} />} />;
   }
 
   render() {
@@ -40,15 +39,7 @@ class D3Test2 extends Component {
         .domain([0, height])
         .range([0, height]),
       color =  d3.rgb
-      // d3.scaleOrdinal().range(
-      //   // d3.schemeGreys.map(function(c) {
-      //   d3.schemeSet1.map(function(c) {
-      //     // d3.schemeSet1.map(function(c) {
-      //     c = d3.rgb(c);
-      //     //c.opacity = 0.5;
-      //     return c;
-      //   })
-      // )
+ 
       ,
       treemap = d3
         .treemap()
@@ -97,13 +88,11 @@ class D3Test2 extends Component {
       .style("height", function(d) {
         return y(d.y1) - y(d.y0) + "%";
       })
-      //.style("background-image", function(d) { return d.value ? imgUrl + d.value : ""; })
       .style("background-image", function(d) {
         return d.value ? `url(${d.data.value})` : "none";
       })
 
 
-      // .style("background-image", function(d) { return d.value ? "url(http://placekitten.com/g/300/300)" : "none"; })
       .style("background-color", function(d) {
         while (d.depth > 2) d = d.parent;
         return color(d.data.name);
@@ -126,7 +115,7 @@ class D3Test2 extends Component {
     .style("border", "50px solid #FFFFFF");
     
     var parent = d3
-    .select(".up")
+    .select(".up-small")
     .datum(nodes)
     .on("click", zoom);
     function zoom(d) {

@@ -14,6 +14,10 @@
     }
   }
 
+  h1 {
+    font-weight: bold;
+  }
+
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -28,11 +32,22 @@
   .CollectionDetail-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 50px;
+    padding-top: 6vh;
+    padding-right: 12vh;
+    padding-left: 12vh;
+    // padding-bottom: 3vh;
     button {
       color: white;
       background-color: transparent;
       width: 50px;
+      transition: 0.3s ease;
+      &:hover {
+        background-color: white;
+        color: black;
+        border-radius: 0px;
+        border: 1px solid white;
+        margin-right: 10px;
+      }
     }
     z-index: 905;
   }
