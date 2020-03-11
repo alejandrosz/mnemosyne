@@ -1,4 +1,23 @@
 .detailPiece {
+  h1 {
+    text-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.95);
+  }
+  button {
+    box-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.75);
+
+    text-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.95);
+  }
+  .image-container {
+    width: 55vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    img {
+      box-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.75);
+    }
+  }
+  text-shadow: 0px 0px 20px rgba(50, 50, 50, 0.65);
+
   .detail-buttons {
     button {
       margin-left: 5px;
@@ -6,6 +25,7 @@
     display: flex;
     align-items: center;
     margin: 15px 0;
+    text-shadow: 0px 0px 20px rgba(50, 50, 50, 0.65);
   }
   h1 {
     font-weight: bold;
@@ -29,12 +49,16 @@
   }
   ::-webkit-scrollbar-track-piece {
     background-color: transparent;
+    box-shadow: 20px 20px 60px #1c1c1d, -20px -20px 60px #000000;
   }
-
+  p {
+    margin-top: 15px;
+  }
   .detail-text {
     width: 55vw;
     height: 20vh;
     overflow-y: auto;
+    text-shadow: 0px 0px 20px rgba(50, 50, 50, 0.65);
   }
   @keyframes appear {
     0% {
@@ -62,14 +86,14 @@
   }
   .square-img {
     height: 55vh;
-    width: 55vw;
+    // width: 55vw;
   }
   .vertical-img {
     height: 55vh;
-    width: 55vw;
+    // width: 55vw;
   }
   .horizontal-img {
-    height: 55vh;
+    // height: 55vh;
     width: 55vw;
   }
 

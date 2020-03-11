@@ -1,0 +1,75 @@
+.PrivateSwitchBase-input-32{
+
+  margin:0
+}
+
+.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1{
+
+
+  color:white
+}
+
+.two-columns{
+  display: flex;
+  flex-direction: row;
+}
+.one-column{
+  display:flex;
+  flex-direction: column;
+}
+
+.check-label{
+  // width: 10px;
+  height: 25px;
+}
+
+
+.MuiTypography-root.MuiFormControlLabel-label.Mui-disabled.MuiTypography-body1{
+color: whitesmoke;
+font-size: 13px;
+
+}
+
+// .MuiIconButton-label {
+//   max-width:5px;
+//   max-height: 5px;
+// }
+// .PrivateSwitchBase-input-32 {
+//   max-width:5px;
+//   max-height: 5px;
+
+// }
+
+.MuiSvgIcon-root{
+max-width:18px;
+max-height: 18px;
+
+}
+.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-29.MuiCheckbox-root.MuiCheckbox-colorSecondary.PrivateSwitchBase-disabled-31.Mui-disabled.MuiIconButton-colorSecondary.Mui-disabled.Mui-disabled{
+// padding:0 -50px
+}
+
+// .two-columns{
+//   display: flex;
+//   flex-direction: column;
+// }
+// .one-column{
+//   display:flex;
+//   flex-direction: row;
+// }
+
+
+// .MuiFormControlLabel-root.Mui-disabled {
+// width: 30px;
+
+// height: 20px;
+// }
+
+.makeStyles-root-1{
+  width: 14vw;
+  // height: 150px;
+  display: flex;
+  flex-wrap: nowrap;
+  margin:-10px;
+  margin-right:-20px
+}

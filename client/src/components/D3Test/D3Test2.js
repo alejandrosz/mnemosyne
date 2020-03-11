@@ -128,7 +128,7 @@ class D3Test2 extends Component {
 
 
       currentDepth = d.depth;
-      var button = d3.select(".up").text(currentDepth <= 0 ? "" : "zoomOut");
+      var button = d3.select(".up").text(currentDepth <= 0 ? "" : "zoom out");
       console.log("button", button);
 
       parent.datum(d.parent || nodes);

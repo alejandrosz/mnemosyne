@@ -11,14 +11,12 @@
 //   return ratedPieces;
 // }
 export function nestByMuseum(pieces) {
-  const tree = { name: "search", value: "", children: [] };
-  const museums = ["MET", "MOMA", "RMA"];
+  const tree = { name: 'search', value: '', children: [] };
+  const museums = ['MET', 'MOMA', 'RMA'];
   museums.forEach(m => {
     const museumPieces = pieces.filter(p => p.museum === m);
     const bestImg = museumPieces[0] && museumPieces[0].imageUrl;
-    const nestedMuseum = museumPieces.length
-      ? nestByDate(museumPieces)
-      : [];
+    const nestedMuseum = museumPieces.length ? nestByDate(museumPieces) : [];
     // console.log('nestByMuseum', nestedMuseum);
     const childMuseum = {
       name: m,
@@ -26,48 +24,47 @@ export function nestByMuseum(pieces) {
       children: nestedMuseum,
       size: museumPieces.length
     };
-    tree.children.push(childMuseum);
+    if (nestedMuseum.length) {
+      tree.children.push(childMuseum);
+    }
     // nodeLentgh +=1
     // setState({ tree });
   });
-  // console.log("tree", tree);
+  console.log('tree', tree);
   return tree;
 }
 
 export function nestByDate(museumPieces) {
   const mainDates = getDatesFromPieces(museumPieces);
-  // console.log('mainDates', mainDates);
+  console.log('mainDates', mainDates);
   const nestedMuseum = [];
   mainDates.forEach((d, i) => {
     const datePieces = museumPieces.filter(p => {
-      if (d === "noDate") {
+      if (d === 'noDate') {
         return !Number.isInteger(p.year);
       }
-      return (
-        p.year >= d && (mainDates[i + 1] ? p.year < mainDates[i + 1] : true)
-      );
+      return p.year >= d && (mainDates[i + 1] ? p.year < mainDates[i + 1] : true);
     });
     const bestImg = datePieces[0] && datePieces[0].imageUrl;
-    const nestedDates = datePieces.length
-      ? nestByOrigin(datePieces)
-      : [];
+    const nestedDates = datePieces.length > 0 ? nestByOrigin(datePieces) : [];
     // console.log('nestedDates', nestedDates);
     const childDate = {
       name: d,
       value: bestImg,
-      children: nestedDates || [],
+      children: nestedDates,
       size: datePieces.length
     };
-    nestedMuseum.push(childDate);
+    if (nestedDates.length) {
+      nestedMuseum.push(childDate);
+    }
   });
   return nestedMuseum;
 }
 export function getDatesFromPieces(museumPieces) {
-  const allYears = museumPieces.map(p => p.year);
-  const piecesWithDate = allYears
-    .filter(y => Number.isInteger(y))
-    .sort((a, b) => a - b);
+  const allYears = museumPieces.map(p => Math.abs(p.year));
+  const piecesWithDate = allYears.filter(y => Number.isInteger(y)).sort((a, b) => a - b);
   const piecesWithNoDate = allYears.filter(y => !Number.isInteger(y));
+  // console.log('allYears', allYears);
   // console.log('piecesWithDate', piecesWithDate, piecesWithNoDate);
   const number = 4;
   const years = [];
@@ -79,23 +76,25 @@ export function getDatesFromPieces(museumPieces) {
       }
     }
     years.push(piecesWithDate[piecesWithDate.length - 1]);
+  } else {
+    years.push(...piecesWithDate);
   }
   if (piecesWithNoDate.length) {
-    years.push("noDate");
+    years.push('noDate');
   }
+  const uYears = [...new Set(years)];
   // console.log("years", years);
-  return years;
+  return uYears;
 }
 export function nestByOrigin(datePieces) {
-  const origins = ["noOrigin"];
+  const origins = ['noOrigin'];
   const nestedDates = [];
   datePieces.forEach(p => {
     if (p.origin.length) {
-      p.origin.forEach(newOrigin => {
-        if (!origins.includes(newOrigin)) {
-          origins.push(newOrigin);
-        }
-      });
+      const newOrigin = p.origin[0];
+      if (!origins.includes(newOrigin)) {
+        origins.push(newOrigin);
+      }
       origins.sort();
     }
   });
@@ -104,21 +103,23 @@ export function nestByOrigin(datePieces) {
   origins.forEach((o, i) => {
     const prevOrigins = i > 0 ? origins.slice(0, i) : [];
     const originPieces = datePieces.filter(p => {
-      if (p.origin.length <= 0 && o === "noOrigin") {
+      if (p.origin.length <= 0 && o === 'noOrigin') {
         return true;
       }
-      return p.origin.includes(
+      return (
+        p.origin[0] ===
+        o /* &&
+        !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or]) */
+        /* return p.origin.includes(
         o
-      ) /* &&
-        !p.origin.reduce((ac, or) => ac || prevOrigins.includes[or]) */;
+      ) */
+      );
     });
     /* console.log('-- currOrigin', o, 'prevOrigins', prevOrigins, 'filtered', [
       ...originPieces.map(p => p.origin)
     ]); */
     const bestImg = originPieces[0] && originPieces[0].imageUrl;
-    const nestedOrigins = originPieces.length
-      ? nestByAuthor(originPieces)
-      : [];
+    const nestedOrigins = originPieces.length ?  nestByAuthor(originPieces)  : [];
     // console.log("nestByOrigin", nestedOrigins.length, o);
     const childDate = {
       name: o,
@@ -142,7 +143,7 @@ export function nestByAuthor(originPieces) {
   });
   authors.forEach((a, i) => {
     const authorPieces = originPieces
-      .filter(p => p.author)
+      .filter(p => p.author === a)
       .map(p => {
         p.value = p.imageUrl;
         p.size = p.rating * 0.1;
@@ -164,4 +165,4 @@ export function nestByAuthor(originPieces) {
   return nestedDates;
 }
 
-export default {nestByMuseum}
+export default { nestByMuseum };

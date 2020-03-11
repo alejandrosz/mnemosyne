@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+// import { Route, Redirect } from "react-router-dom";
 import * as d3 from "d3";
 import "./D3Test2small.scss";
 import { withRouter } from "react-router-dom";
@@ -112,7 +112,9 @@ class D3Test2 extends Component {
     .append("button")
     .attr("class", "button-detail")
     .on("click", this.goDetail)
-    .style("border", "50px solid #FFFFFF");
+    .html("&#65291;")
+
+    // .style("border", "50px solid #FFFFFF");
     
     var parent = d3
     .select(".up-small")
@@ -124,12 +126,9 @@ class D3Test2 extends Component {
       // console.log("clicked: " + d.data.name + ", depth: " + d.depth);
       
       currentDepth = d.depth;
-      var button = d3.select(".up-small").text(currentDepth <= 0 ? "" : "zoomOut");
+      var button = d3.select(".up-small").text(currentDepth <= 0 ? "" : "zoom out");
 
 
-
-
-      
       parent.datum(d.parent || nodes);
       
       x.domain([d.x0, d.x1]);

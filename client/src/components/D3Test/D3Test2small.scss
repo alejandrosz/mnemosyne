@@ -1,6 +1,29 @@
 $m: 0; // margin
 .button-detail {
-  // border: 5px solid black;
+  box-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.75);
+
+  text-shadow: 0px 0px 64px 1px rgba(0, 0, 0, 0.95);
+  right: 0;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  line-height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  color: rgb(228, 228, 228);
+  text-shadow: 0px 0px 11px rgba(91, 91, 91, 0.45);
+  animation: 0.5s;
+  &:hover {
+    color: white;
+    border: 2px solid white;
+  }
+  border: 2px solid grey;
 }
 
 .father-small {
@@ -76,15 +99,17 @@ html,
     font-family: sans-serif;
     text-transform: uppercase;
     font-size: 1rem;
-    color: hsla(0, 0, 100, 0.6);
-    //white-space: nowrap;
+    color: white;
+    font-weight: bold;
     position: absolute;
     padding: 0;
-    margin: 0;
-    bottom: 10%;
-    left: 10%;
+    margin-left: 30px;
+    bottom: 20%;
+    left: 20%;
+    max-width: 350px;
     transform: translateX(-50%) translateY(-50%);
     transition: color 0.4s, opacity 0.8s, filter 0.8s;
+    text-shadow: 0px 0px 11px rgba(91, 91, 91, 0.45);
   }
   &.hide {
     // zoom in

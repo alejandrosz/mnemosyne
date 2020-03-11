@@ -4,24 +4,26 @@ import TextField from '@material-ui/core/TextField';
 import "./TextField.scss"
 import Theme from "../ThemeProvider/Theme"
 
+const { window } = global;
+const { innerWidth } = window;
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: innerWidth/5,
     },
   },
 }));
 
-export default function BasicTextFields() {
+export default function BasicTextFields(props) {
   const classes = useStyles();
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <ThemeProvider theme={Theme}> 
-      <TextField id="standard-basic" label="Search" />
-      </ThemeProvider>
-    </form>
+ <div className="input-text-field">   <form className={classes.root} noValidate autoComplete="off">
+ <ThemeProvider theme={Theme}> 
+ <TextField onKeyPress={props.onKeyDown} id="standard-basic" label="Search" />
+ </ThemeProvider>
+</form></div>
   );
 }

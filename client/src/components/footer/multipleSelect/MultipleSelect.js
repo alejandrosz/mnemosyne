@@ -12,11 +12,15 @@ import Chip from "@material-ui/core/Chip";
 import "./MultipleSelect.scss";
 import Theme from "../ThemeProvider/Theme";
 
+
+const { window } = global;
+const { innerWidth } = window;
+
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 250,
-    maxWidth: 250
+    minWidth: innerWidth/4,
+    maxWidth: innerWidth/4
   },
   chips: {
     display: "flex"
@@ -36,7 +40,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
+      width: innerWidth/4
     }
   }
 };

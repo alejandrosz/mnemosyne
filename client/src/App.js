@@ -13,7 +13,7 @@ import Profile from "./components/profile/Profile";
 import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
 import CollectionDetail from "./components/CollectionDetail/CollectionDetail";
-var Loader = require("react-loader");
+// var Loader = require("react-loader");
 
 // d3.select(this.refs.myDiv).style(“background-color”, “blue”)
 // render(<div ref=”myDiv”></div>)
@@ -59,22 +59,6 @@ class App extends Component {
       });
   }
 
-  // searchBar(e) {
-  //   if (e.key === "Enter") {
-  //     axios
-  //       .get(
-  //         `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${e.target.value}`
-  //       )
-  //       .then(results => {
-  //         results = results.data.objectIDs;
-  //         if (results) {
-  //           this.setState({ resultsId: results }, () => {
-  //             this.getResultsDetail(0);
-  //           });
-  //         }
-  //       });
-  //   }
-  // }
   setLoaded() {
     console.log("isloaded", this.state.loaded);
     this.setState({ loaded: true });
@@ -82,6 +66,7 @@ class App extends Component {
 
   searchMongo(e) {
     if (e.key === "Enter") {
+      e.preventDefault();
       axios
         .get(`${process.env.REACT_APP_API_URL}/pieces/${e.target.value}`)
         .then(results => {
@@ -90,6 +75,7 @@ class App extends Component {
             const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
             const tree = nestByMuseum(filteredResults, this.nodeLength);
+            console.log(tree)
             this.setState({
               resultsDetail: filteredResults,
               tree: tree,
@@ -114,7 +100,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="App">
-          <Loader loaded={this.state.loaded}></Loader>
+          {/* <Loader loaded={this.state.loaded}></Loader> */}
 
           <D3Test2 setLoaded={this.setLoaded} data={this.state.tree}></D3Test2>
           <Navbar
