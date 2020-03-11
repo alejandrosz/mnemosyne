@@ -1,12 +1,18 @@
 $m: 0; // margin
-.button-detail{
-  margin-top: 30px;
-  margin-left: 30px;
-height: 30px;
-width: 30px;
-border: 3px solid black;
-background-color: transparent;
-border: 5px solid black
+.button-detail {
+  margin-top: 40px;
+  margin-left: 40px;
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  line-height: 100%; 
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  border: 2px solid black;
+
 }
 
 // .last-cell {
@@ -16,7 +22,6 @@ border: 5px solid black
 //   // flex-direction: column;
 //   // align-items: flex-end;
 // }
-
 
 .father {
   height: 100vh;
@@ -40,23 +45,32 @@ body {
   // top: calc(100vh - 100px - 3vh);
   // padding-top: 2vw;
   z-index: 50;
-  
+
   .up {
-    
     font: bold 14px/1 sans-serif;
     color: white;
-    height: 3vh;
+    height: 6vh;
     width: 100vw;
     display: flex;
     align-items: center;
     padding-left: 8px;
-    background-color: rgba(228, 228, 228, 0.8);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(15, 15, 15, 0.5),
+      rgba(15, 15, 15, 0.5),
+      rgba(255, 255, 255, 0)
+    );
+    // background-color: rgba(228, 228, 228, 0.8);
     float: left;
     // background-image:
     // linear-gradient(to bottom, rgba(92,47,90,1), rgba(92,47,90,0));
     cursor: pointer;
     &:hover {
-      background-color: rgba(173, 173, 173, 0.8);
+      background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0)
+      );
     }
   }
 }
@@ -82,8 +96,8 @@ body {
     font-family: sans-serif;
     text-transform: uppercase;
     font-size: 1rem;
-    color:white;
-    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    // background-color: rgba(0, 0, 0, 0.2);
     font-weight: bold;
     //white-space: nowrap;
     position: absolute;
@@ -93,6 +107,7 @@ body {
     left: 10%;
     transform: translateX(-50%) translateY(-50%);
     transition: color 0.4s, opacity 0.8s, filter 0.8s;
+    text-shadow: 0px 0px 11px rgba(91, 91, 91, 0.45);
   }
   &.hide {
     // zoom in
@@ -111,7 +126,7 @@ body {
   }
   &.level-0 {
     z-index: 4;
-    
+
     font-size: 15vmin;
     display: none;
   }

@@ -1,7 +1,6 @@
 $m: 0; // margin
-.button-detail{
-  bottom:0;
-border: 5px solid black
+.button-detail {
+  // border: 5px solid black;
 }
 
 .father-small {
@@ -18,7 +17,6 @@ border: 5px solid black
   box-sizing: border-box;
 }
 html,
-
 .nav-bar-d3-small {
   position: fixed;
   // width: 80vw;
@@ -26,9 +24,8 @@ html,
   // top: calc(100vh - 100px - 3vh);
   // padding-top: 2vw;
   z-index: 1050;
-  
+
   .up-small {
-    
     font: bold 14px/1 sans-serif;
     color: white;
     height: 3vh;
@@ -36,13 +33,22 @@ html,
     display: flex;
     align-items: center;
     padding-left: 8px;
-    background-color: rgba(228, 228, 228, 0.8);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(15, 15, 15, 0.5),
+      rgba(15, 15, 15, 0.5),
+      rgba(255, 255, 255, 0)
+    );
     float: left;
     // background-image:
     // linear-gradient(to bottom, rgba(92,47,90,1), rgba(92,47,90,0));
     cursor: pointer;
     &:hover {
-      background-color: rgba(173, 173, 173, 0.8);
+      background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0)
+      );
     }
   }
 }
@@ -61,7 +67,7 @@ html,
   //border: 1px white solid;
   overflow: hidden;
   opacity: 0.8;
-  transform: translate(calc(20vw/2), (22vh/2));
+  transform: translate(calc(20vw / 2), (22vh/2));
   z-index: 850;
   transition: opacity 0.8s;
   cursor: pointer;
@@ -101,7 +107,7 @@ html,
     // transform: translate(calc(20vw/2), (30vh/2));
 
     z-index: 904;
-    
+
     font-size: 15vmin;
     display: none;
   }
@@ -129,5 +135,4 @@ html,
     z-index: 900;
     font-size: 2.5vmin;
   }
-
 }

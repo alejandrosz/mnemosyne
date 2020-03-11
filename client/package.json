@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@material-ui/core": "^4.9.5",
     "axios": "^0.18.0",
+    "chroma-js": "^2.1.0",
     "d3": "^5.15.0",
     "dotenv-cli": "^3.1.0",
     "jquery": "^3.4.1",
@@ -18,6 +19,7 @@
     "react-loader": "^2.4.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
+    "react-select": "^3.0.8",
     "react-vis": "^1.11.7",
     "treemap": "^1.0.4"
   },

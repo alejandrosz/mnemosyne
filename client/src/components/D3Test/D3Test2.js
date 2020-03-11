@@ -41,7 +41,7 @@ class D3Test2 extends Component {
         .scaleLinear()
         .domain([0, height])
         .range([0, height]),
-      color = d3.rgb
+      color = d3.rgb,
       // d3.scaleOrdinal().range(
       //   // d3.schemeGreys.map(function(c) {
       //   d3.schemeSet1.map(function(c) {
@@ -51,7 +51,6 @@ class D3Test2 extends Component {
       //     return c;
       //   })
       // )
-      ,
       treemap = d3
         .treemap()
         .size([width, height])
@@ -98,7 +97,6 @@ class D3Test2 extends Component {
         return d.value ? `url(${d.data.value})` : "none";
       })
 
-      // .style("background-image", function(d) { return d.value ? "url(http://placekitten.com/g/300/300)" : "none"; })
       .style("background-color", function(d) {
         while (d.depth > 2) d = d.parent;
         return color(d.data.name);
@@ -109,46 +107,17 @@ class D3Test2 extends Component {
       .text(function(d) {
         return d.data.name ? d.data.name : "---";
       });
-    //.style("font-size", "")
-    //.style("opacity", function(d) { return isOverflowed( d.parent ) ? 1 : 0; });
-
-    // function goDetail(d) {
-    //   console.log("detail", `${process.env.REACT_APP_URL}/detail/${d.data._id}`);
-    //   let url = `${process.env.REACT_APP_URL}/detail/${d.data._id}`;
-    //   return <Redirect to={url} />;
-    // }
+   
 
     cells // show this depth + 1 and below
       .filter(function(d) {
         return d.depth >= 5;
       })
-      // .attr("class", "laultima")
-      .append("button") 
-      .text("detail")
+      .append("button")
+      // .text("")
+      .html("&#65291;")
       .attr("class", "button-detail")
-      .on("click", this.goDetail)
-      // .style("border", "4px solid #000000");
-
-      // cells // show this depth + 1 and below
-      // .filter(function(d) {
-      //   return d.depth >= 5;
-      // })
-      // .attr("class", "laultima")
-    
-
-    // .append("a")
-
-    // .append("rect")
-    // .attr("x", 50)
-    // .attr("y", 50)
-    // .attr("height", 50)
-    // .attr("width", 50)
-    // .style("fill", "lightgreen")
-    // .style("border", "50px solid #0000FF");
-
-    // <Link to=`/detail/${d.data._id}`>
-    //   {" "}
-    // </Link>;
+      .on("click", this.goDetail);
 
     var parent = d3
       .select(".up")
@@ -157,9 +126,10 @@ class D3Test2 extends Component {
     function zoom(d) {
       // http://jsfiddle.net/ramnathv/amszcymq/
 
-      // console.log("clicked: " + d.data.name + ", depth: " + d.depth);
 
       currentDepth = d.depth;
+      var button = d3.select(".up").text(currentDepth <= 0 ? "" : "zoomOut");
+      console.log("button", button);
 
       parent.datum(d.parent || nodes);
 
@@ -168,7 +138,6 @@ class D3Test2 extends Component {
 
       var t = d3
         .transition()
-        // .duration(Math.floor(Math.random() * 2200) + 1200)
         .duration(1200)
 
         .ease(d3.easeCubicOut);
@@ -202,13 +171,12 @@ class D3Test2 extends Component {
         })
         .classed("hide", false);
     }
-let loadedCount =0
-    // $('node').bgLoaded({afterLoaded: ()=>this.props.setLoaded})
+    let loadedCount = 0;
 
     return (
       <div className="father">
         <nav className="nav-bar-d3">
-          <div className="up">mnemosine</div>
+          <div className="up"></div>
         </nav>
         <div className="feature" id="chart"></div>
       </div>

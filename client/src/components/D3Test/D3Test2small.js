@@ -124,6 +124,11 @@ class D3Test2 extends Component {
       // console.log("clicked: " + d.data.name + ", depth: " + d.depth);
       
       currentDepth = d.depth;
+      var button = d3.select(".up-small").text(currentDepth <= 0 ? "" : "zoomOut");
+
+
+
+
       
       parent.datum(d.parent || nodes);
       
@@ -170,7 +175,7 @@ class D3Test2 extends Component {
     return (
       <div className="father-small">
         <nav className="nav-bar-d3-small">
-          <div className="up-small">mnemosine</div>
+          <div className="up-small"></div>
         </nav>
         <div className="feature-small" id="chart-small"></div>
       </div>

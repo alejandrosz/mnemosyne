@@ -1,0 +1,47 @@
+.MuiChip-root.makeStyles-chip-61 {
+  background-color: transparent;
+  height: auto;
+}
+
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+  // top: 90;
+  // transform-origin: none;
+  // transform: none;
+  // padding: 0px;
+  background-color: rgba(220, 220, 220, 0.1);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  // background: #f1f1f1;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.9);
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+
+.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 5px;
+}
+
+.MuiMenu-paper {
+  transform: translateY(-60px) !important;
+}
+
+.MuiList-root.MuiMenu-list.MuiList-padding {
+  padding: 5px;
+}

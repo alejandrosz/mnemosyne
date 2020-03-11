@@ -131,8 +131,7 @@
 .rv-discrete-color-legend-item.horizontal {
   display: inline-block;
 }
-.rv-discrete-color-legend-item.horizontal
-  .rv-discrete-color-legend-item__title {
+.rv-discrete-color-legend-item.horizontal .rv-discrete-color-legend-item__title {
   margin-left: 0;
   display: block;
 }
@@ -229,3 +228,16 @@
 .rv-radial-chart .rv-xy-plot__series--label {
   pointer-events: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
