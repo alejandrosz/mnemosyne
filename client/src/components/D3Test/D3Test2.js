@@ -107,7 +107,6 @@ class D3Test2 extends Component {
       .text(function(d) {
         return d.data.name ? d.data.name : "---";
       });
-   
 
     cells // show this depth + 1 and below
       .filter(function(d) {
@@ -126,9 +125,10 @@ class D3Test2 extends Component {
     function zoom(d) {
       // http://jsfiddle.net/ramnathv/amszcymq/
 
-
       currentDepth = d.depth;
-      var button = d3.select(".up").text(currentDepth <= 0 ? "" : "zoom out");
+      var button = d3
+        .select(".up")
+        .text(currentDepth <= 0 ? "nested by museum" : currentDepth <= 1 ? "zoom out - nested by time" : currentDepth <= 2 ? "zoom out - nested by origin" : currentDepth <= 3 ? "zoom out - nested by author" : "zoom out - single piece" );
       console.log("button", button);
 
       parent.datum(d.parent || nodes);
@@ -176,7 +176,7 @@ class D3Test2 extends Component {
     return (
       <div className="father">
         <nav className="nav-bar-d3">
-          <div className="up"></div>
+          <div className="up">nested by museum</div>
         </nav>
         <div className="feature" id="chart"></div>
       </div>

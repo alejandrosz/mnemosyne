@@ -39,14 +39,10 @@ router.get("/pieces/:filter", (req, res, next) => {
     });
 });
 
-router.post("/pieces/find"), (req, res, next) => {
-  let filter = req.body
+// router.post("/pieces/find"), (req, res, next) => {
+//   let filter = req.body
 
-
-
-
-
-}
+// }
 
 router.get("/profile/:id", (req, res, next) => {
   Users.findById(req.params.id)
@@ -60,6 +56,31 @@ router.get("/profile/:id", (req, res, next) => {
     .then(userFound => res.json(userFound))
     .catch(err => {
       console.error("Error connecting to mongo");
+      next(err);
+    });
+});
+
+router.get("/piecesrandom", (req, res, next) => {
+  let randomResult = [];
+  Pieces.aggregate([{ $match: { museum: "MOMA" } }, { $sample: { size: 15 } }])
+    .then(piecesFound => {
+      randomResult.push(...piecesFound);
+      Pieces.aggregate([
+        { $match: { museum: "MET" } },
+        { $sample: { size: 20 } }
+      ]).then(piecesFound => {
+        randomResult.push(...piecesFound);
+        Pieces.aggregate([
+          { $match: { museum: "RMA" } },
+          { $sample: { size: 15 } }
+        ]).then(piecesFound => {
+          randomResult.push(...piecesFound);
+          return res.json(randomResult);
+        });
+      });
+    })
+    .catch(err => {
+      console.error(err);
       next(err);
     });
 });

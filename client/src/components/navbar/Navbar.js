@@ -29,26 +29,17 @@ class Navbar extends Component {
   }
 
   render() {
-    // this.state.loggedInUser &&
-    //   console.log("navbar", this.state.loggedInUser._id);
     return (
       <nav className="nav-style">
-        {/* <input
-          type="text"
-          onKeyDown={e => this.props.searchBar(e)}
-          placeholder="searchapi"
-        ></input> */}
-
         {this.state.loggedInUser ? (
           <React.Fragment>
             <div className="profile-navbar">
               {" "}
-              {/* <Link to={`/profile/${this.state.loogedInUser._id}`}> */}
               <Link to="/profile">
                 {" "}
-                <h1>{this.state.loggedInUser.username}</h1>
+                <h1 id="loggedname">{this.state.loggedInUser.username}</h1>
               </Link>
-              <a onClick={this.handleLogout}>logout</a>
+              <a id="logoutlink" onClick={this.handleLogout}>logout</a>
             </div>
           </React.Fragment>
         ) : (

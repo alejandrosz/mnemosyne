@@ -1,9 +1,11 @@
 @import "reset.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
 *:focus {
   outline: none;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: black;
 }
 button {
@@ -18,12 +20,29 @@ a:link {
 }
 
 .App {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   // background: url(https://images.adsttc.com/media/images/5939/3484/e58e/ce9b/3000/02ae/slideshow/Aby_Warburg.jpg?1496921216);
   // background-size: auto;
   // display: flex;
   // justify-content: center;
+
   .Profile-style {
     margin: 0 auto;
     z-index: 200;
   }
+  .initialcard {
+    margin:0 auto;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    position: fixed;
+    z-index: 100;
+    align-self: center;
+justify-content: center;
+  }
 }
+
+

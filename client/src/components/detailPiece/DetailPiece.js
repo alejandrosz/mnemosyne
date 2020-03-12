@@ -108,7 +108,8 @@ class DetailPiece extends Component {
       culture,
       classification,
       rating,
-      department
+      department,
+      museumId
     } = this.state.piece;
 
     return (
@@ -178,8 +179,8 @@ class DetailPiece extends Component {
           <div className="detail-text">
             {" "}
             {<h1>{name}</h1>}
-            {author && <p>author {author}</p>}
-            {year && <p>year {year}</p>}
+            {author && <p>author: {author}</p>}
+            {year && <p>year: {year}</p>}
             {museum === "RMA" ? (
               <p>Rijksmuseum of Amsterdam</p>
             ) : museum === "MOMA" ? (
@@ -187,23 +188,24 @@ class DetailPiece extends Component {
             ) : (
               <p>Metropolitan Museum of Art</p>
             )}
-            {technic && <p>technic {technic}</p>}
+            {museumId && <p>museumId: {museumId}</p>}
+            {technic && <p>technic: {technic}</p>}
             {origin && (
               <p>
-                origin
+                origin:
                 {origin && <p>{origin[0]}</p>}
               </p>
             )}
             {tags && (
               <p>
-                tags
+                tags:
                 {tags && tags.map(tag => <p>{tag}</p>)}
               </p>
             )}
-            {description && <p>description{description}</p>}
-            {culture && <p>culture{culture}</p>}
-            {classification && <p>classification{classification}</p>}
-            {department && <p>department{department}</p>}
+            {description && <p>description: {description}</p>}
+            {culture && <p>culture: {culture}</p>}
+            {classification && <p>classification: {classification}</p>}
+            {department && <p>department: {department}</p>}
           </div>
         </div>
       </div>
