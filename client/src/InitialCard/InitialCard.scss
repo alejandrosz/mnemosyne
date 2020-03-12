@@ -1,0 +1,33 @@
+.initialcard {
+  color: white;
+  width: 40vw;
+  height: 40vw;
+  background-color: rgba(29, 29, 29, 0.601);
+  padding-top: 35px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-bottom: 25px;
+  text-shadow: 0px 0px 11px rgba(91, 91, 91, 0.75);
+  font-size: 16px;
+.bold-text{
+  font-weight: bold;
+}
+  button {
+    position: absolute;
+    top: -5;
+    right: 0;
+    margin-right: 40px;
+    transition: 0.3s ease;
+    &:hover {
+      background-color: white;
+      color: black;
+      border-radius: 0px;
+      border: 1px solid white;
+      margin-right: 10px;
+    }
+    color: white;
+    background-color: transparent;
+    width: 50px;
+  }
+  box-shadow: 0px 0px 30px 0.5px rgba(0, 0, 0, 0.65);
+}
