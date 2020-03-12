@@ -50,7 +50,6 @@ class D3Test2 extends Component {
       nodes = d3.hierarchy(data).sum(function(d) {
         return d.value ? 1 : 0;
       }),
-      //.sort(function(a, b) { return b.height - a.height || b.value - a.value });
 
       currentDepth;
 

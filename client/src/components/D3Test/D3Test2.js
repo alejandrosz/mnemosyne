@@ -42,25 +42,17 @@ class D3Test2 extends Component {
         .domain([0, height])
         .range([0, height]),
       color = d3.rgb,
-      // d3.scaleOrdinal().range(
-      //   // d3.schemeGreys.map(function(c) {
-      //   d3.schemeSet1.map(function(c) {
-      //     // d3.schemeSet1.map(function(c) {
-      //     c = d3.rgb(c);
-      //     //c.opacity = 0.5;
-      //     return c;
-      //   })
-      // )
+
       treemap = d3
         .treemap()
         .size([width, height])
-        //.tile(d3.treemapResquarify) // doesn't work - height & width is 100%
         .paddingInner(0)
         .round(false), //true
       nodes = d3.hierarchy(data).sum(function(d) {
-        return d.value ? 1 : 0;
-      }),
-      //.sort(function(a, b) { return b.height - a.height || b.value - a.value });
+        return d.value ? 1 : 0
+      })
+      // .sort(function(a, b) { return b.height - a.height || b.value - a.value })
+      ,
 
       currentDepth;
 
@@ -92,7 +84,6 @@ class D3Test2 extends Component {
       .style("height", function(d) {
         return y(d.y1) - y(d.y0) + "%";
       })
-      //.style("background-image", function(d) { return d.value ? imgUrl + d.value : ""; })
       .style("background-image", function(d) {
         return d.value ? `url(${d.data.value})` : "none";
       })
@@ -129,7 +120,6 @@ class D3Test2 extends Component {
       var button = d3
         .select(".up")
         .text(currentDepth <= 0 ? "nested by museum" : currentDepth <= 1 ? "zoom out - nested by time" : currentDepth <= 2 ? "zoom out - nested by origin" : currentDepth <= 3 ? "zoom out - nested by author" : "zoom out - single piece" );
-      console.log("button", button);
 
       parent.datum(d.parent || nodes);
 

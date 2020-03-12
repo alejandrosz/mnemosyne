@@ -45,16 +45,11 @@ const MenuProps = {
 };
 
 const names = [
-  "Oliver",
-  "Van",
-  "April",
-  "Ralph",
-  "Omar",
-  "Carlos",
-  "Miriam",
-  "Bradley",
-  "Virginia",
-  "Kelly"
+  "Red",
+  "Birds",
+  "Paintings",
+  "Architecture",
+  "Sky",
 ];
 
 function getStyles(name, personName, theme) {

@@ -33,8 +33,7 @@ class App extends Component {
     this.service = new AuthService();
     this.fetchUser();
     this.sendSearch = this.sendSearch.bind(this);
-    this.closeInitialCard = this.closeInitialCard.bind(this)
-
+    this.closeInitialCard = this.closeInitialCard.bind(this);
   }
   componentDidMount() {
     this.randomSearch();
@@ -45,9 +44,7 @@ class App extends Component {
       results = results.data;
       if (results) {
         const filteredResults = results; //this.filterResults(results);
-        console.log("results filteredResults", results, filteredResults);
         const tree = nestByMuseum(filteredResults, this.nodeLength);
-        console.log(tree);
         this.setState({
           resultsDetail: filteredResults,
           tree: tree
@@ -82,7 +79,6 @@ class App extends Component {
   }
 
   setLoaded() {
-    console.log("isloaded", this.state.loaded);
     this.setState({ loaded: true });
   }
 
@@ -103,8 +99,8 @@ class App extends Component {
           if (results) {
             const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
+
             const tree = nestByMuseum(filteredResults, this.nodeLength);
-            console.log(tree);
             this.setState({
               resultsDetail: filteredResults,
               tree: tree
@@ -124,42 +120,34 @@ class App extends Component {
     this.setState({ filters: e.target.value });
   }
   sendSearch() {
-    // axios
-    //   // .get(`${process.env.REACT_APP_API_URL}/pieces/${}`)
-    //   .then(results => {
-    //     results = results.data;
-    //     if (results) {
-    //       const filteredResults = results; //this.filterResults(results);
-    //       console.log("results filteredResults", results, filteredResults);
-    //       const tree = nestByMuseum(filteredResults, this.nodeLength);
-    //       console.log(tree);
-    //       this.setState({
-    //         resultsDetail: filteredResults,
-    //         tree: tree
-    //       });
-    //     }
-    //   });
-
     console.log(
-      "send",
-      this.state.yearRange,
+      "search",
       this.state.searchText,
       this.state.filters,
-      this.state.dataBases
+      this.state.yearRange
     );
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/find`, {
+        searchText: this.state.searchText || "",
+        filters: this.state.filters || [""],
+        yearRange: this.state.yearRange || [-1000, 2000]
+      })
+      .then(results => {
+        results = results.data;
+        if (results) {
+          const filteredResults = results; //this.filterResults(results);
+          console.log("results filteredResults", results, filteredResults);
+          const tree = nestByMuseum(filteredResults, this.nodeLength);
+          console.log(tree);
+          this.setState({
+            resultsDetail: filteredResults,
+            tree: tree
+          });
+        }
+      });
   }
 
-  // getData(results) {
-  //   let data = results.map(result => ({
-  //     name: result.name,
-  //     value: result.imageUrl
-  //   }));
-  //   this.setState({ resultsDetail: { children: data } });
-  //   console.log("state", this.state.resultsDetail);
-  // }
-
   closeInitialCard() {
-    console.log("close");
     this.setState({ introOpen: false });
   }
 
@@ -185,12 +173,12 @@ class App extends Component {
       position: "absolute" // Element positioning
     };
 
-    console.log("app render", this.state.loaded);
     return (
       <React.Fragment>
         <div className="App">
-          
-          {this.state.introOpen && <InitialCard closeInitialCard={this.closeInitialCard}></InitialCard>}
+          {this.state.introOpen && (
+            <InitialCard closeInitialCard={this.closeInitialCard}></InitialCard>
+          )}
           <Loader loaded={this.state.isLoaded} options={opts}></Loader>
           <D3Test2 setLoaded={this.setLoaded} data={this.state.tree}></D3Test2>
           <Navbar

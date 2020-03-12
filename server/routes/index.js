@@ -4,8 +4,10 @@ const Users = require("../models/User");
 const Collections = require("../models/Collection");
 const Pieces = require("../models/Piece");
 const mongoose = require("mongoose");
+const limit = 30;
 
 router.get("/pieces/:filter", (req, res, next) => {
+  console.log("hola", req.params);
   let filter = req.params.filter;
   Pieces.find({
     $and: [
@@ -29,8 +31,8 @@ router.get("/pieces/:filter", (req, res, next) => {
       { "origin.0": { $exists: true } }
     ]
   })
-    .sort({ rating: 1 })
-    .limit(40)
+    .sort({ rating: -1 })
+    .limit(30)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error on search", err.message);
@@ -39,10 +41,51 @@ router.get("/pieces/:filter", (req, res, next) => {
     });
 });
 
-// router.post("/pieces/find"), (req, res, next) => {
-//   let filter = req.body
-
-// }
+router.post("/find",
+  (req, res, next) => {
+    let { yearRange, searchText, filters } = req.body;
+   let  regExpFilter = filters.map(filter => new RegExp(filter, "gi"))
+    Pieces.find({
+      $and: [
+        {
+          $or: [
+            { name: new RegExp(searchText, "gi") },
+            { museum: new RegExp(searchText, "gi") },
+            { description: new RegExp(searchText, "gi") },
+            { author: new RegExp(searchText, "gi") },
+            { period: new RegExp(searchText, "gi") },
+            { culture: new RegExp(searchText, "gi") },
+            { origin: new RegExp(searchText, "gi") },
+            { technic: new RegExp(searchText, "gi") },
+            { classification: new RegExp(searchText, "gi") },
+            { department: new RegExp(searchText, "gi") },
+            { tags: new RegExp(searchText, "gi") }
+          ]
+        },
+        { year: { $gte: yearRange[0], $lte: yearRange[1] } },
+        {
+          $or: [
+            { name: { $in: [...regExpFilter] } },
+            { description: { $in: [...regExpFilter] } },
+            { culture: { $in: [...regExpFilter] } },
+            { technic: { $in: [...regExpFilter] } },
+            { classification: { $in: [...regExpFilter] } },
+            { department: { $in: [...regExpFilter] } },
+            { tags: { $in: [...regExpFilter] } },
+          ]
+        }
+      ]
+    })
+      .sort({ rating: -1 })
+      .limit(30)
+      .then(piecesFound => { 
+        return res.json(piecesFound)})
+    .catch(err => {
+      console.error("Error on search", err.message);
+      console.error(err);
+      next(err);
+    });
+  });
 
 router.get("/profile/:id", (req, res, next) => {
   Users.findById(req.params.id)
