@@ -12,15 +12,14 @@ import Chip from "@material-ui/core/Chip";
 import "./MultipleSelect.scss";
 import Theme from "../ThemeProvider/Theme";
 
-
 const { window } = global;
 const { innerWidth } = window;
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: innerWidth/4,
-    maxWidth: innerWidth/4
+    minWidth: innerWidth / 4,
+    maxWidth: innerWidth / 4
   },
   chips: {
     display: "flex"
@@ -40,7 +39,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: innerWidth/4
+      width: innerWidth / 4
     }
   }
 };
@@ -67,13 +66,14 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect() {
+export default function MultipleSelect(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = event => {
     setPersonName(event.target.value);
+    props.onSelectTag(event);
   };
 
   const handleChangeMultiple = event => {

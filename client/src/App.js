@@ -7,16 +7,10 @@ import AuthService from "./components/auth/AuthService";
 import axios from "axios";
 import Footer from "./components/footer/Footer";
 import { nestByMuseum } from "./nestData";
-// import * as d3 from "d3";
-// import "../treeStyles.css"
 import Profile from "./components/profile/Profile";
 import DetailPiece from "./components/detailPiece/DetailPiece";
 import D3Test2 from "./components/D3Test/D3Test2";
 import CollectionDetail from "./components/CollectionDetail/CollectionDetail";
-// var Loader = require("react-loader");
-
-// d3.select(this.refs.myDiv).style(“background-color”, “blue”)
-// render(<div ref=”myDiv”></div>)
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +18,10 @@ class App extends Component {
     this.state = {
       loggedInUser: null,
       search: "",
+      searchText: "",
+      filters: [],
+      yearRange: [],
+      dataBases: ["RMA", "MOMA", "MET"],
       resultsId: [],
       resultsDetail: [],
       tree: {},
@@ -31,7 +29,7 @@ class App extends Component {
     };
     this.service = new AuthService();
     this.fetchUser();
-    // this.nodeLength = 0
+    this.sendSearch = this.sendSearch.bind(this);
   }
 
   getUser = userObj => {
@@ -75,16 +73,50 @@ class App extends Component {
             const filteredResults = results; //this.filterResults(results);
             console.log("results filteredResults", results, filteredResults);
             const tree = nestByMuseum(filteredResults, this.nodeLength);
-            console.log(tree)
+            console.log(tree);
             this.setState({
               resultsDetail: filteredResults,
-              tree: tree,
+              tree: tree
             });
           }
         });
     }
   }
-  // /////////////////////////////
+
+  sliderResult(e) {
+    this.setState({ yearRange: e });
+  }
+  saveSearch(e) {
+    this.setState({ searchText: e.target.value });
+  }
+  multipleSelectResult(e) {
+    this.setState({ filters: e.target.value });
+  }
+  sendSearch() {
+    axios
+      // .get(`${process.env.REACT_APP_API_URL}/pieces/${}`)
+      .then(results => {
+        results = results.data;
+        if (results) {
+          const filteredResults = results; //this.filterResults(results);
+          console.log("results filteredResults", results, filteredResults);
+          const tree = nestByMuseum(filteredResults, this.nodeLength);
+          console.log(tree);
+          this.setState({
+            resultsDetail: filteredResults,
+            tree: tree
+          });
+        }
+      });
+
+    console.log(
+      "send",
+      this.state.yearRange,
+     this.state.searchText,
+      this.state.filters,
+      this.state.dataBases
+    );
+  }
 
   // getData(results) {
   //   let data = results.map(result => ({
@@ -100,11 +132,8 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="App">
-          {/* <Loader loaded={this.state.loaded}></Loader> */}
-
           <D3Test2 setLoaded={this.setLoaded} data={this.state.tree}></D3Test2>
           <Navbar
-            // searchBar={e => this.searchBar(e)}
             userInSession={this.state.loggedInUser}
             logout={this.logout}
             getUser={this.getUser}
@@ -125,9 +154,7 @@ class App extends Component {
                 />
               )}
             />
-            {/* <Route  path="/" /> */}
             <Route
-              // path="/profile/:id"
               path="/profile"
               render={props => (
                 <Profile user={this.state.loggedInUser} {...props} />
@@ -135,11 +162,14 @@ class App extends Component {
             />
           </Switch>
           <Footer
+            sendResults={this.sendSearch}
+            sliderResult={e => this.sliderResult(e)}
+            multipleSelectResult={e => this.multipleSelectResult(e)}
+            saveSearch={e => this.saveSearch(e)}
             searchMongo={e => this.searchMongo(e)}
             tags={this.state.resultsDetail ? this.state.resultsDetail : []}
           ></Footer>
         </div>
-        {/* <SimpleTreemapExample></SimpleTreemapExample> */}
       </React.Fragment>
     );
   }

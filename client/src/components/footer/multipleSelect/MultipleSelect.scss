@@ -1,6 +1,11 @@
 .MuiChip-root.makeStyles-chip-61 {
-  background-color: transparent;
   height: auto;
+}
+.MuiChip-root.makeStyles-chip-132 {
+  background-color: transparent;
+  margin: 0;
+  height: auto;
+  padding: 0;
 }
 
 .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
@@ -16,7 +21,6 @@
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  // background: #f1f1f1;
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 /* Handle */
@@ -30,7 +34,6 @@
 ::-webkit-scrollbar-track-piece {
   background-color: transparent;
 }
-
 
 .MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
   padding-top: 1px;

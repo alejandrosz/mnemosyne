@@ -39,6 +39,15 @@ router.get("/pieces/:filter", (req, res, next) => {
     });
 });
 
+router.post("/pieces/find"), (req, res, next) => {
+  let filter = req.body
+
+
+
+
+
+}
+
 router.get("/profile/:id", (req, res, next) => {
   Users.findById(req.params.id)
     .populate([

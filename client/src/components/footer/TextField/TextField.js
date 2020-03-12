@@ -22,7 +22,7 @@ export default function BasicTextFields(props) {
   return (
  <div className="input-text-field">   <form className={classes.root} noValidate autoComplete="off">
  <ThemeProvider theme={Theme}> 
- <TextField onKeyPress={props.onKeyDown} id="standard-basic" label="Search" />
+ <TextField onChange={props.onChange} onKeyPress={props.onKeyDown} id="standard-basic" label="Search" />
  </ThemeProvider>
 </form></div>
   );

@@ -5,7 +5,7 @@ import Slider from "./slider/Slider";
 import MultipleSelect from "./multipleSelect/MultipleSelect";
 // import { TextField } from "@material-ui/core";
 import TextField from "./TextField/TextField";
-import SendButton from "./sendButton/SendButton";
+import UploadButtons from "./sendButton/UploadButtons";
 import CheckboxesGroup from "./CheckboxesGroup/CheckboxesGroup";
 // import logo-mnemosine from "../../../public/images/logo-mnemosine";
 
@@ -26,13 +26,18 @@ class Footer extends Component {
         {/* <image url("")/> */}
         {/* <img src={logo-mnemosine} alt="logo"/> */}
 
-        <img className="mnemosine-logo" src="/images/logo-mnemosine.png"/>	
+        <img className="mnemosine-logo" src="/images/logo-mnemosine.png" />
         {/* <h1 className="mnemosine-title">mnemosine</h1> */}
         <CheckboxesGroup></CheckboxesGroup>
-        <TextField onKeyDown={e => this.props.searchMongo(e)}></TextField>
-        <MultipleSelect></MultipleSelect>
-        <Slider></Slider>
-        <SendButton></SendButton>
+        <TextField
+          onChange={e => this.props.saveSearch(e)}
+          onKeyDown={e => this.props.searchMongo(e)}
+        ></TextField>
+        <MultipleSelect
+          onSelectTag={e => this.props.multipleSelectResult(e)}
+        ></MultipleSelect>
+        <Slider changeRange={e => this.props.sliderResult(e)}></Slider>
+        <UploadButtons sendResults={this.props.sendResults}></UploadButtons>
       </div>
     );
   }

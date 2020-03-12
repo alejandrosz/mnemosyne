@@ -8,6 +8,9 @@
   color: white;
   right: 0;
 }
+input {
+  color: white;
+}
 
 .change-style {
   background-color: transparent;
@@ -21,7 +24,6 @@
   flex-direction: row;
 }
 .profile-navbar {
-
   display: flex;
   h1 {
     margin-right: 5px;
