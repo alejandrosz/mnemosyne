@@ -50,6 +50,10 @@ const names = [
   "Paintings",
   "Architecture",
   "Sky",
+  "Letter",
+  "Music",
+  "Metal",
+  "Design"
 ];
 
 function getStyles(name, personName, theme) {
