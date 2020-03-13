@@ -30,7 +30,6 @@ class Collections extends Component {
   }
 
   render() {
-    console.log("num collections", this.props.collections.length);
     return (
       <div className="collections-style">
         <div className="add-field">

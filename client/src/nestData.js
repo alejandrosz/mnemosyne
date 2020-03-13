@@ -12,14 +12,13 @@ export function nestByMuseum(pieces) {
       value: bestImg,
 
       children: nestedMuseum,
-      size: bestRating, //  museumPieces.length
+      size: bestRating, 
     };
     if (nestedMuseum.length) {
       tree.children.push(childMuseum);
     }
 
   });
-  console.log("tree", tree);
   return tree;
 }
 
@@ -42,7 +41,7 @@ export function nestByDate(museumPieces) {
       name: d,
       value: bestImg,
       children: nestedDates,
-      size: bestRating, //  datePieces.length
+      size: bestRating, 
     };
     if (nestedDates.length) {
       nestedMuseum.push(childDate);
@@ -103,7 +102,7 @@ export function nestByOrigin(datePieces) {
       name: o,
       value: bestImg,
       children: nestedOrigins || [],
-      size: bestRating, //  //originPieces.length
+      size: bestRating, 
     };
     if (nestedOrigins.length > 0) {
       nestedDates.push(childDate);

@@ -65,7 +65,6 @@ class DetailPiece extends Component {
         });
       };
 
-      console.log("state", this.state);
     });
   }
 
@@ -80,7 +79,6 @@ class DetailPiece extends Component {
     Axios.put(
       `${process.env.REACT_APP_API_URL}/collection/add/${collectionId}&${this.state.piece._id}`
     ).then(pieceAdded => {
-      console.log("pieceAdded", pieceAdded.data);
       this.getProfile(this.state.user);
     });
   }
@@ -89,7 +87,6 @@ class DetailPiece extends Component {
     Axios.put(
       `${process.env.REACT_APP_API_URL}/collection/del/${collectionId}&${this.state.piece._id}`
     ).then(pieceDeleted => {
-      console.log("pieceDeleted", pieceDeleted.data);
       this.getProfile(this.state.user);
     });
   }

@@ -13,7 +13,6 @@ class Profile extends Component {
   state = { profile: {} };
 
   getProfile(user) {
-    console.log("callingrefetchprofile", user, this.props.user);
     let useUser = user || this.props.user;
     if (useUser) {
       Axios.get(`${process.env.REACT_APP_API_URL}/profile/${useUser._id}`).then(
@@ -26,10 +25,7 @@ class Profile extends Component {
 
   setUserProfile(userData) {
     this.setState({ ...this.state, profile: userData });
-    console.log(
-      "collections from back",
-      userData && userData.collections && userData.collections.length
-    );
+
   }
 
   componentWillReceiveProps(next) {
@@ -42,11 +38,7 @@ class Profile extends Component {
 
   render() {
     const { profile } = this.state;
-    // console.log("user", this.props.user);
-    console.log(
-      "profile collections",
-      profile && profile.collections && profile.collections.length
-    );
+ 
 
     if (this.props.user) {
       return (

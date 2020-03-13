@@ -12,7 +12,6 @@ class Contents extends Component {
     const style = { width: "100vw", height: "78vh", backgroundColor: "black" };
     const imgArray = this.props.query.map(elem => elem.primaryImageSmall);
     let renderTimes = Math.ceil(this.props.query.length/6)
-    console.log(imgArray);
     return (
       <div style={style}>
         {/* <Container renderMore={renderTimes} imgArray={imgArray} /> */}

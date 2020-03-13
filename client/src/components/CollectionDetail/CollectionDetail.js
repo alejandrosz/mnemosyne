@@ -31,7 +31,6 @@ class CollectionDetail extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="CollectionDetail-style">
         <div className="CollectionDetail-top">

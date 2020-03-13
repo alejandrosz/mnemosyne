@@ -3,15 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import * as d3 from "d3";
 import "./D3Test2.scss";
 import { withRouter } from "react-router-dom";
-import $ from "jquery";
-import "./BackgroundLoader.js";
 
-// import data from "./Dataset1";
-// import data2 from "./Dataset2";
-// import data from "./Dataset3";
-// import data from "./Dataset4";
 
-// import * as data2 from './Dataset2'
 
 class D3Test2 extends Component {
   constructor(props) {
@@ -26,7 +19,6 @@ class D3Test2 extends Component {
   goDetail(d) {
     let url = `/detail/${d.data._id}`;
     return this.props.history.push(url);
-    // return <Route render={() => <Redirect to={url} />} />;
   }
 
   render() {
@@ -161,7 +153,6 @@ class D3Test2 extends Component {
         })
         .classed("hide", false);
     }
-    let loadedCount = 0;
 
     return (
       <div className="father">

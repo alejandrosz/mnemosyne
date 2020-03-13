@@ -15,10 +15,10 @@ class InitialCard extends Component {
         </p>
         <br />
         <p>
-          At the beggining, random sample of the archive from the
-          Metropolitan Museum of Art, Museum of Modern Art and Rijksmuseum of
-          Amsterdam are showed. In total there are more than 1.230.000 pieces of art
-          reachable through their APIs and databases.
+          At the beggining, a random sample of the archive from the Metropolitan
+          Museum of Art, Museum of Modern Art and Rijksmuseum of Amsterdam are
+          showed. In total there are more than 1.230.000 pieces of art reachable
+          through their APIs and databases.
         </p>
         <br />
         <p>
@@ -27,8 +27,10 @@ class InitialCard extends Component {
           interests.
         </p>
         <br />
-        <ul>
-          <li>The results are nested in 5 levels:</li>
+        <ul className="important-text">
+          <li className="important-text">
+            The results are nested in 5 levels:
+          </li>
           <li>
             <span className="bold-text">1</span> Database to which they belong
           </li>
@@ -52,13 +54,13 @@ class InitialCard extends Component {
         </p>
         <br />
         <p>
-          Sign up and create your own collections adding pieces to them.
+          You can like any item! They are showed bigger when they gain likes.
         </p>
         <br />
-        <p>
-          You can like any item! They are showed bigger when they gain
-          likes.
+        <p className="important-text">
+          Sign up and create your own collections adding pieces to them.
         </p>
+
         <br />
         <p>
           The aim of the project is make possible connect more and more media

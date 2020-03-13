@@ -4,7 +4,7 @@ const Users = require("../models/User");
 const Collections = require("../models/Collection");
 const Pieces = require("../models/Piece");
 const mongoose = require("mongoose");
-const limit = 30;
+// const limit = 30;
 
 router.get("/pieces/:filter", (req, res, next) => {
   console.log("hola", req.params);
@@ -32,7 +32,7 @@ router.get("/pieces/:filter", (req, res, next) => {
     ]
   })
     .sort({ rating: -1 })
-    .limit(30)
+    .limit(40)
     .then(piecesFound => res.json(piecesFound))
     .catch(err => {
       console.error("Error on search", err.message);
@@ -77,7 +77,7 @@ router.post("/find",
       ]
     })
       .sort({ rating: -1 })
-      .limit(30)
+      .limit(40)
       .then(piecesFound => { 
         return res.json(piecesFound)})
     .catch(err => {

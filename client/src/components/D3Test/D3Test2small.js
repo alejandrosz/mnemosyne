@@ -113,7 +113,6 @@ class D3Test2 extends Component {
     .on("click", this.goDetail)
     .html("&#65291;")
 
-    // .style("border", "50px solid #FFFFFF");
     
     var parent = d3
     .select(".up-small")
@@ -122,7 +121,6 @@ class D3Test2 extends Component {
     function zoom(d) {
       // http://jsfiddle.net/ramnathv/amszcymq/
       
-      // console.log("clicked: " + d.data.name + ", depth: " + d.depth);
       
       currentDepth = d.depth;
       var button = d3.select(".up-small").text(currentDepth <= 0 ? "" : "zoom out");
@@ -135,7 +133,6 @@ class D3Test2 extends Component {
       
       var t = d3
       .transition()
-      // .duration(Math.floor(Math.random() * 2200) + 1200)
         .duration(1200)
 
         .ease(d3.easeCubicOut);

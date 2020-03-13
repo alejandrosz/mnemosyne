@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.scss";
-import "../src/components/treeStyles.css";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import AuthService from "./components/auth/AuthService";
@@ -98,7 +97,6 @@ class App extends Component {
           results = results.data;
           if (results) {
             const filteredResults = results; //this.filterResults(results);
-            console.log("results filteredResults", results, filteredResults);
 
             const tree = nestByMuseum(filteredResults, this.nodeLength);
             this.setState({
@@ -120,11 +118,12 @@ class App extends Component {
     this.setState({ filters: e.target.value });
   }
   sendSearch() {
-    console.log(
-      "search",
-      this.state.searchText,
-      this.state.filters,
-      this.state.yearRange
+    this.setState({ isLoaded: false });
+    setTimeout(
+      function() {
+        this.setState({ isLoaded: true });
+      }.bind(this),
+      4000
     );
     axios
       .post(`${process.env.REACT_APP_API_URL}/find`, {
@@ -135,10 +134,8 @@ class App extends Component {
       .then(results => {
         results = results.data;
         if (results) {
-          const filteredResults = results; //this.filterResults(results);
-          console.log("results filteredResults", results, filteredResults);
+          const filteredResults = results; 
           const tree = nestByMuseum(filteredResults, this.nodeLength);
-          console.log(tree);
           this.setState({
             resultsDetail: filteredResults,
             tree: tree
