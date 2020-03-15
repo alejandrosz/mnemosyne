@@ -33,6 +33,9 @@ npm start
 
 Or you can test the project through this [Heroku link](http://mn3m0s1n3.herokuapp.com/)
 
+![Main page](/readme-img.png)
+
+
 ## Getting Started
 
 Navigation is done through **React** and the interactive visualization of a large number of elements using **D3** library through zooms that allows to access the information. Once the lower level is reached, a detail view can be opened where the complete data of an item appears and you can store it in your collections or like to make the image bigger.
@@ -47,6 +50,9 @@ The information is organized hierarchically following a **treemap** data model w
 Firstly, a random sample of results appears. Also the web has a search bar that can be used in combination with a selection of filters or a time restriction.
 
 The databases of the Museum of Modern Art in New York, the Metropolitan and the Rijksmuseum in Amsterdam are currently reacheable. The three of them has in total around 1.200.000 objects that have been filtered, eliminating duplicates or items with insufficient information, so that in the application **mongoDB** database there are 230,000 registers under a single model.
+
+![Detail page](/readme-img3.png)
+
 
 ## Build with
 * D3 - https://github.com/d3/d3
