@@ -227,7 +227,7 @@ router.delete("/collection/:id", (req, res, next) => {
   Collections.findByIdAndDelete(req.params.id).then(() => {
     Users.findOne({ collections: req.params.id }).then(user => {
       let updatedCollections = user.collections.filter(
-        c => c.toString() !== req.params.id
+        c => c.toString() !== req.params.id 
       );
       Users.findByIdAndUpdate(
         { _id: user._id },
